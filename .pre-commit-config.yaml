@@ -1,0 +1,71 @@
+# Install once per clone: uv run --project experiments pre-commit install
+# Tools come from experiments/uv.lock. Hooks that edit files only touch experiments/.
+default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]
+
+repos:
+  - repo: local
+    hooks:
+      - id: nbstripout
+        name: strip notebook outputs
+        entry: uv run --project experiments --frozen nbstripout
+        language: system
+        types: [jupyter]
+      - id: ruff-check
+        name: ruff lint
+        entry: uv run --project experiments --frozen ruff check --force-exclude --fix
+        language: system
+        types: [python]
+        files: ^experiments/
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --project experiments --frozen ruff format --force-exclude
+        language: system
+        types: [python]
+        files: ^experiments/
+      - id: uv-lock
+        name: check uv lockfile
+        entry: uv lock --project experiments --check
+        language: system
+        pass_filenames: false
+        files: ^experiments/(pyproject\.toml|uv\.lock)$
+      - id: pytest
+        name: shared evaluation tests
+        entry: uv run --project experiments --frozen pytest -q -c experiments/pyproject.toml experiments/tests
+        language: system
+        pass_filenames: false
+        files: ^experiments/(common|tests)/
+      - id: check-added-large-files
+        name: block large files
+        entry: uv run --project experiments --frozen check-added-large-files --maxkb=1024
+        language: system
+      - id: detect-private-key
+        name: block private keys
+        entry: uv run --project experiments --frozen detect-private-key
+        language: system
+        types: [text]
+      - id: check-merge-conflict
+        name: block merge conflict markers
+        entry: uv run --project experiments --frozen check-merge-conflict
+        language: system
+        types: [text]
+      - id: end-of-file-fixer
+        name: fix end of files
+        entry: uv run --project experiments --frozen end-of-file-fixer
+        language: system
+        types: [text]
+        files: ^experiments/
+        exclude: ^experiments/(results/|paper_analysis/paper_tables\.json)
+      - id: trailing-whitespace
+        name: trim trailing whitespace
+        entry: uv run --project experiments --frozen trailing-whitespace-fixer --markdown-linebreak-ext=md
+        language: system
+        types: [text]
+        files: ^experiments/
+        exclude: ^experiments/(results/|paper_analysis/paper_tables\.json)
+      - id: conventional-one-line-commit
+        name: one-line conventional commit
+        entry: '\A(?:Merge [^\n]+|(?:build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(?:\([a-z0-9-]+\))?!?: [^\n]+)\n*(?:#[^\n]*\n*)*\Z'
+        language: pygrep
+        args: [--negate, --multiline]
+        stages: [commit-msg]
