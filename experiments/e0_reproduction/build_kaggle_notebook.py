@@ -51,7 +51,8 @@ OUTPUT.mkdir(parents=True, exist_ok=True)
 
 def sh(command, check=True, cwd=None):
     print("$", command, flush=True)
-    code = subprocess.run(f"set -o pipefail; {command}", shell=True, executable="/bin/bash", cwd=cwd, env=RUN_ENV).returncode
+    bash_command = f"set -o pipefail; {command}"
+    code = subprocess.run(bash_command, shell=True, executable="/bin/bash", cwd=cwd, env=RUN_ENV).returncode
     if code and check:
         raise RuntimeError(f"command failed with exit code {code}")
     if code:
