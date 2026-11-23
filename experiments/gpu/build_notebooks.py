@@ -136,7 +136,7 @@ E2_STAGES = [
 )""",
     """stage(
     "gpu.run_entity",
-    f"--model flock --direction tail --condition no_resembles --seeds 0,1,2 --output-dir {OUTPUT}/runs",
+    f"--model flock --direction tail --condition no_resembles --seeds 0,1 --output-dir {OUTPUT}/runs",
 )""",
 ]
 
