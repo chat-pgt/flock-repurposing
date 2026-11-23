@@ -79,13 +79,13 @@ def ultra_states(model, data, n_relations, device):
 
 
 @torch.no_grad()
-def flock_states(model, data, drugs, treats, n_relations, device):
+def flock_states(model, data, drugs, query_relation, n_relations, device):
     module = sys.modules[type(model).__module__]
     if not (model.attention_scatter and model.additive_refinement):
         raise ValueError("expected the released attention and additive-update configuration")
     states, visited = [], []
     for drug in drugs.tolist():
-        batch = torch.tensor([[[drug, 0, treats]]], device=device)
+        batch = torch.tensor([[[drug, 0, query_relation]]], device=device)
         with RelationStateRecorder(module, 2 * n_relations + 1, data.num_nodes) as recorder:
             model(data, batch)
         states.append((model.type_init[None, None] + recorder.update).float().cpu().numpy())
@@ -98,6 +98,7 @@ def main():
     parser.add_argument("--model", choices=["flock", "ultra"], required=True)
     parser.add_argument("--seeds", default="0,1,2")
     parser.add_argument("--n-queries", type=int, default=20)
+    parser.add_argument("--query-relation", default=TREATS, help="FLOCK's query relation (default: treats)")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--deadline", type=float, help="Unix time after which no new seed starts")
@@ -132,9 +133,10 @@ def main():
     model, settings = load_flock("entity", device, args.walk_num, args.ensemble)
     data = build_data(graph, keep, "flock", device).to(device)
     drugs = sample_drugs(graph, args.n_queries)
-    treats = graph.relation_names.index(TREATS)
+    query_relation = graph.relation_names.index(args.query_relation)
+    prefix = "e7_flock" if args.query_relation == TREATS else f"e7_flock_query-{args.query_relation}"
     for seed in [int(value) for value in args.seeds.split(",")]:
-        path = args.output_dir / f"e7_flock_seed{seed}.npz"
+        path = args.output_dir / f"{prefix}_seed{seed}.npz"
         if path.exists():
             print(f"skip {path.name}", flush=True)
             continue
@@ -145,9 +147,10 @@ def main():
         if str(device).startswith("cuda"):
             torch.cuda.reset_peak_memory_stats()
         start = time.perf_counter()
-        states, visited = flock_states(model, data, drugs, treats, n_relations, device)
+        states, visited = flock_states(model, data, drugs, query_relation, n_relations, device)
         info = {
             **run_metadata(device, model="flock", **settings),
+            "query_relation": args.query_relation,
             "seed": seed,
             "seconds": time.perf_counter() - start,
             "peak_gpu_gb": peak_gpu_gb(device),
