@@ -12,22 +12,24 @@ ranking over forward relations, on the authors' 112,510 test triples. It covers 
 
 ## Baselines
 
-Both baselines look only at relations seen in training between the entity types of h and t.
-
-- **Baseline A (uniform)** picks among those relations at random.
-- **Baseline B (frequency)** ranks them by how often each one occurs in training. It ignores which
-  specific entities are in the query, so every Compound–Gene pair gets the same ranking.
+- **Baseline A (uniform)** picks at random among the relations seen in training between the entity types
+  of h and t.
+- **Baseline B (frequency)** ranks those same relations by how often each one occurs in training. It
+  ignores which specific entities are in the query, so every Compound–Gene pair gets the same ranking.
+- **Baseline C (graph signature)** uses no entity-type labels, which the models do not receive either.
+  Relations that h has used as a head and t has used as a tail in training come first, and each group
+  is ordered by training frequency.
 
 ## Examples
 
 These are real test triples.
 
-| Query | True relation | Candidates (training count) | Baseline B | Difficulty |
-|---|---|---|---|---|
-| BRCA1 → double-strand break repair | *participates* | *participates* only | Rank 1 | Easy: the entity types leave one option |
-| Metformin → PSME1 | *downregulates* | *downregulates* 18,975; *upregulates* 16,936; *binds* 10,410 | Rank 1 | Harder: correct only because it is the most common |
-| Metformin → COPB2 | *upregulates* | Same as above | Rank 2 | Harder: needs information about this pair |
-| Diclofenac → osteoarthritis | *palliates* | *treats* 682; *palliates* 355 | Rank 2 | Harder: needs information about this pair |
+| Query | True relation | Candidates (training count) | B's rank | C's rank | Why |
+|---|---|---|---|---|---|
+| BRCA1 → double-strand break repair | *participates* | *participates* only | 1 | 1 | Easy: the entity types leave one option |
+| Metformin → PSME1 | *downregulates* | *downregulates* 18,975; *upregulates* 16,936; *binds* 10,410 | 1 | 1 | Harder: correct because it is the most common relation |
+| Metformin → COPB2 | *upregulates* | Same as above | 2 | 2 | Harder: both endpoints have used *up* and *down*, so C also falls back on frequency |
+| Diclofenac → osteoarthritis | *palliates* | *treats* 682; *palliates* 355 | 2 | 1 | Harder: *palliates* is the only relation both endpoints have used in training |
 
 ## Reproduce
 
