@@ -18,6 +18,34 @@ runs.
 
 ## Experiments
 
-| ID | Result | Evidence | Slide |
-|---|---|---|---|
-| | *None yet* | | |
+### E0. Reproduction and environment
+
+*Pending.*
+
+### E1. FLOCK vs ULTRA vs popularity
+
+*Pending.*
+
+### E2. Near-duplicate leakage
+
+*Pending.*
+
+### E3. Walk coverage
+
+*Pending.*
+
+### E4. Walk explanations
+
+*Pending.*
+
+### E5. Type-constrained negatives
+
+*Pending.*
+
+### E6. No-learning baselines for relation prediction
+
+*Pending.*
+
+### E7. Relation similarity
+
+*Pending.*
