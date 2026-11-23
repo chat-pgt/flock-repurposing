@@ -125,11 +125,11 @@ def git(*arguments, text=True):
     return subprocess.run(["git", *arguments], cwd=REPO, capture_output=True, text=text, check=True).stdout
 
 
-def cell(cell_id, source, cell_type="code"):
+def cell(index, source, cell_type="code"):
     outputs = {"execution_count": None, "outputs": []} if cell_type == "code" else {}
     return {
         "cell_type": cell_type,
-        "id": cell_id,
+        "id": str(index),
         "metadata": {},
         "source": source.splitlines(keepends=True),
         **outputs,
@@ -148,23 +148,17 @@ def main():
     archive = git("archive", "--format=tar.gz", "HEAD", "--", *BUNDLED_FILES, text=False)
     get_code = GET_CODE.replace("__BUNDLE__", base64.b64encode(archive).decode())
     setup = SETUP.replace("__COMMIT__", git("rev-parse", "HEAD").strip()).replace("__UPSTREAM__", upstream)
+    code_cells = (setup, GPU_CHECK, get_code, INSTALL, WALKER, REPRODUCE, HETIONET, SUMMARY)
     notebook = {
         "cells": [
-            cell("instructions", INSTRUCTIONS, "markdown"),
-            cell("setup", setup),
-            cell("gpu-check", GPU_CHECK),
-            cell("get-code", get_code),
-            cell("install", INSTALL),
-            cell("walker", WALKER),
-            cell("reproduce", REPRODUCE),
-            cell("hetionet", HETIONET),
-            cell("summary", SUMMARY),
+            cell(0, INSTRUCTIONS, "markdown"),
+            *(cell(index, source) for index, source in enumerate(code_cells, start=1)),
         ],
         "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"}},
         "nbformat": 4,
         "nbformat_minor": 5,
     }
-    # Same layout as nbformat, so the output-stripping hook leaves a freshly built notebook unchanged.
+    # Same layout and cell ids as nbstripout, so the hook leaves a freshly built notebook unchanged.
     args.output.write_text(json.dumps(notebook, indent=1, sort_keys=True, ensure_ascii=False) + "\n")
     print(f"wrote {args.output} from {git('rev-parse', '--short', 'HEAD').strip()}")
 
