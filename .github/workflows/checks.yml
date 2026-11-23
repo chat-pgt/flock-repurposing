@@ -2,7 +2,6 @@ name: checks
 
 on:
   pull_request:
-    branches: [experiments]
   push:
     branches: [experiments]
 
@@ -13,8 +12,6 @@ jobs:
   hooks:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    env:
-      UV_PYTHON: "3.14"
     steps:
       - uses: actions/checkout@v4
       - run: pipx install uv==0.12.8
