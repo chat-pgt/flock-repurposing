@@ -48,13 +48,13 @@ model. Changing D1–D4, D8 or D9 means rerunning everything that depends on the
 |---|---|---|---|
 | D1 | **Data.** Official Hetionet v1.0, verified by checksum (`common/get_hetionet.sh`). | A fixed public release. | proposed |
 | D2 | **Split.** Five folds over the 755 *treats* edges, stratified by disease, with a fixed seed. A fold's edges and their inverses are removed from the graph. Results are reported pooled, and separately for drugs with and without another known indication in that fold's training graph. E0 and E6 use the authors' split instead. | 258 edges are their drug's only indication. Holding one out asks for a first indication, which is a different task from finding a new use. E0 and E6 must stay comparable with the paper. | agreed |
-| D3 | **Queries.** Tail only: (compound, *treats*, ?). | Matches the question "which diseases could this drug treat?". The paper averages head and tail queries over all relations, so its Hetionet figures are not directly comparable. | proposed |
+| D3 | **Queries.** Tail only: (compound, *treats*, ?). | A scope choice for this study, answering "which diseases could this drug treat?". Repurposing also asks the reverse, "which drugs could treat this disease?", which is left as an extension. The paper averages head and tail queries over all relations, so its Hetionet figures are not directly comparable. | proposed |
 | D4 | **Candidates.** Primary (the headline result): the 136 diseases in the graph. Secondary (a supporting view from the same run): all 45,158 connected entities. | A drug's indication is always a disease. The secondary view shows the effect of the paper's larger candidate set. | proposed |
 | D5 | **Filtering.** Remove other known *treats* pairs from the ranking. Diseases the drug *palliates* stay as competitors. A version that also removes them is reported as a sensitivity check. | The two relations never overlap in Hetionet, so palliated diseases are curated examples of "related, but not disease-modifying". Removing them would hide that error. | agreed |
 | D6 | **Metrics.** MRR and Hits@10 with the exact random baseline. Ties are broken uniformly at random, in expectation, for every model. | The released ranking counts every tie against the target. That would penalise a popularity baseline, where at least 59 diseases share a count of zero. | proposed |
 | D7 | **Uncertainty.** At least three walk seeds for stochastic models, averaged per edge. 95% CIs from a two-way bootstrap that resamples drugs and diseases independently (Owen, 2007). Models are compared through paired per-edge differences. | Edges are dependent along both axes: 10 of the 77 treated diseases hold 43% of edges, and 66% of edges come from drugs with several indications. | agreed |
 | D8 | **Models.** Released checkpoints pretrained on FB15k-237, WN18RR and CoDEx-Medium, used zero-shot. ULTRA's public checkpoint on the same three graphs, at a pinned commit. | Same pretraining data for both models. Training-seed variance cannot be measured from a single checkpoint, and results must state this. | proposed |
-| D9 | **FLOCK settings.** The paper's zero-shot Hetionet setting (n = 512, P = 2). A change forced by memory applies to all folds and seeds, and is reported. | Keeps results comparable with the paper and across folds. | proposed |
+| D9 | **FLOCK settings.** The paper's zero-shot Hetionet setting (n = 512, P = 2), on which Table 18 and the released config agree. A change forced by memory applies to all folds and seeds, and is reported. | Keeps results comparable with the paper and across folds. Fine-tuning is less clear: Table 18 states P = 1 and n = 1024, while the released config runs P = 2 at n = 1024. E5 therefore evaluates at the zero-shot setting. | proposed |
 
 ---
 
@@ -133,8 +133,9 @@ Priorities are *core*, *extension* and *optional*.
   45,000 nodes, so on average fewer than one is a disease.
 - **Question.** Does fine-tuning on *treats* improve with disease-only negatives?
 - **Design.** For *treats* positives, draw tail negatives from diseases only, and compare with uniform
-  negatives on the same folds. Run ULTRA first, then FLOCK if it fits in memory. Hyperparameters stay
-  fixed at the published values, with no tuning on held-out folds. Training negatives are filtered
+  negatives on the same folds. Run ULTRA first, then FLOCK if it fits in memory. Both arms are evaluated
+  at the D9 setting. Other hyperparameters stay fixed at the published values, with no tuning on
+  held-out folds. Training negatives are filtered
   against the training graph only, so held-out edges can be drawn as negatives, as would happen in
   practice.
 - **Read-out.** A gain supports better negatives. A loss may reflect pushing down true but unrecorded
