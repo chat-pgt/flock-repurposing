@@ -178,10 +178,12 @@ Priorities are *core*, *extension* and *optional*.
   similarity for same-type pairs (Compound, Disease and Anatomy up/down–Gene; *treats* vs *palliates*)
   and for control pairs that connect different entity types, both raw and after subtracting the mean
   relation. Add a PCA plot like the paper's Figure 6.
+  A follow-up repeats FLOCK with a neutral query relation (*Compound causes Side Effect*), and scores 100
+  *upregulates* and 100 *downregulates* Compound–Gene test triples as relation queries, where chance is 50%.
 - **Read-out.** ULTRA cosine near 1, well above the controls, demonstrates the paper's motivation on
   pharmacological data. Values close to the controls mean the problem does not bind on Hetionet.
-- **Compute.** GPU, about 60 FLOCK queries.
-- **Status.** Run on a Kaggle T4. Awaiting review.
+- **Compute.** GPU, about 60 FLOCK queries, plus about 2 hours for the follow-up.
+- **Status.** First run done and reviewed. Follow-up prepared, not run.
 
 ---
 
