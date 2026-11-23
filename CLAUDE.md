@@ -14,6 +14,7 @@ FLOCK performs on drug repurposing with Hetionet. The study lives in `experiment
   commits, so `git diff upstream/main -- src_entity src_relation graph-walker` shows every patch.
 - Keep personal, employer and interview details out of tracked files. This repo may become public.
 - Commits are one-line, atomic and conventional, with no co-author trailer.
+- Run `uv run --project experiments pre-commit install` once per clone. Never bypass the hooks.
 - Each experiment gets its own branch and a PR into `experiments`. The PR body records the question,
   steps, decisions, result and reproduction commands.
 
@@ -28,8 +29,7 @@ FLOCK performs on drug repurposing with Hetionet. The study lives in `experiment
 
 ## Compute
 
-- **Local machine:** no GPU, 7 GB RAM. CPU analysis only (`uv sync` in `experiments/`, then
-  `uv run pytest` and `uv run ruff check .`).
+- **Local machine:** no GPU, 7 GB RAM. CPU analysis only (`uv sync` in `experiments/`).
 - **Kaggle T4:** main GPU machine. Not the P100.
 - **Colab:** second machine, for ULTRA and debugging. Only 2 CPU cores, and walk sampling is on the CPU.
 - GPU environment: see the root `README.md` (PyTorch 2.8, CUDA 12.6, `torch_geometric==2.4.0`,
@@ -42,6 +42,6 @@ FLOCK performs on drug repurposing with Hetionet. The study lives in `experiment
 - Walk sampling draws its seed from NumPy, which the released code never seeds. Experiment runners must
   seed it.
 - `compute_ranking` counts ties against the target. Experiments use `common/evaluation.py` instead.
-- The released code appears to give r and r⁻¹ different anonymous IDs and to label each hop at random as
-  (r, forward) or (r⁻¹, backward), unlike Appendix A.2. This comes from reading the code and is
-  **unconfirmed**. E0 checks it.
+- The released code gives r and r⁻¹ different anonymous IDs and labels each hop at random as
+  (r, forward) or (r⁻¹, backward), unlike Appendix A.2. `experiments/e0_reproduction/check_walker.py`
+  confirms this.
