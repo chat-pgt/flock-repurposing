@@ -48,7 +48,7 @@ model. Changing D1–D4, D8 or D9 means rerunning everything that depends on the
 |---|---|---|---|
 | D1 | **Data.** Official Hetionet v1.0, verified by checksum (`common/get_hetionet.sh`). | A fixed public release. | agreed |
 | D2 | **Split.** Five folds over the 755 *treats* edges, stratified by disease, with a fixed seed. A fold's edges and their inverses are removed from the graph. Results are reported pooled, and separately for drugs with and without another known indication in that fold's training graph. E0 and E6 use the authors' split instead. | 258 edges are their drug's only indication. Holding one out asks for a first indication, which is a different task from finding a new use. E0 and E6 must stay comparable with the paper. | agreed |
-| D3 | **Queries.** Tail only: (compound, *treats*, ?). | A scope choice for this study, answering "which diseases could this drug treat?". Repurposing also asks the reverse, "which drugs could treat this disease?", which is left as an extension. The paper averages head and tail queries over all relations, so its Hetionet figures are not directly comparable. | agreed |
+| D3 | **Queries.** Primary: tail queries, (compound, *treats*, ?). Secondary: head queries, (?, *treats*, disease), ranked over the 1,538 connected compounds and run after the core experiments. | Tail queries ask "which diseases could this drug treat?" and head queries ask "which drugs could treat this disease?". Each is read against its own random baseline because the candidate sets differ. The paper averages head and tail queries over all relations, so its Hetionet figures are not directly comparable. | agreed |
 | D4 | **Candidates.** Primary (the headline result): the 136 diseases in the graph. Secondary (a supporting view from the same run): all 45,158 connected entities. | A drug's indication is always a disease. The secondary view shows the effect of the paper's larger candidate set. | agreed |
 | D5 | **Filtering.** Remove other known *treats* pairs from the ranking. Diseases the drug *palliates* stay as competitors. A version that also removes them is reported as a sensitivity check. | The two relations never overlap in Hetionet, so palliated diseases are curated examples of "related, but not disease-modifying". Removing them would hide that error. | agreed |
 | D6 | **Metrics.** MRR and Hits@10 with the exact random baseline. Ties are broken uniformly at random, in expectation, for every model. | The released ranking counts every tie against the target. That would penalise a popularity baseline, where at least 59 diseases share a count of zero. | agreed |
@@ -84,9 +84,12 @@ Priorities are *core*, *extension* and *optional*.
 - **Origin.** Is learning on random walks the right approach for repurposing, and do benchmark gains
   mean anything against simple or purpose-built alternatives?
 - **Question.** Do the foundation models beat a baseline with no learning on *treats* prediction?
-- **Design.** On the shared folds, compare FLOCK, ULTRA and a popularity baseline that ranks diseases by
-  how many training drugs treat them.
-- **Read-out.** If popularity comes close, the task mostly rewards hub diseases.
+- **Design.** On the shared folds, compare FLOCK, ULTRA and a popularity baseline that ranks candidates
+  by their number of *treats* edges in the training graph. Tail queries run first. Head queries follow
+  once the core experiments are done, under the same rule: other drugs known to treat the disease are
+  filtered, and drugs that palliate it stay as competitors.
+- **Read-out.** If popularity comes close, the task mostly rewards hub diseases (tail) or drugs with many
+  indications (head). Raw scores are not compared across directions.
 - **Compute.** CPU for popularity, GPU for the models.
 - **Status.** Not started.
 
