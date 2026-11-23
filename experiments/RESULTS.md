@@ -44,7 +44,16 @@ runs.
 
 ### E6. No-learning baselines for relation prediction
 
-*Pending.*
+| Result | Evidence | Slide |
+|---|---|---|
+| Baseline C (no entity-type labels, only the training graph), all 112,510 test triples: MRR 0.912, Hits@1 0.853 | `results/e6_relation_baselines.json` | 2 |
+| Baseline B (entity types and training frequency): MRR 0.885, Hits@1 0.796 | same | 2 |
+| Baseline A (uniform among type-compatible relations): MRR 0.779, Hits@1 0.620 | same | |
+| Published zero-shot scores for comparison: FLOCK 0.940 / 0.890, TRIX 0.809 / 0.707, ULTRA 0.634 / 0.524 (MRR / Hits@1) | Table 11 of the paper | 2 |
+| 48,419 test triples (43%) have only one relation compatible with their entity types. On the other 64,091, MRR is 0.798 for B and 0.851 for C. FLOCK's published 0.940 implies at least 0.895 on those triples | same | 2 |
+| Compound–Disease, *treats* vs *palliates* (56 triples): Hits@1 is 50% at random, 64.3% for B and 60.7% for C (34 of 56, 95% Wilson CI [47.6%, 72.4%]). Too few triples to separate the baselines | same | |
+
+FLOCK's scores here are the published ones. They have not been reproduced in this study yet.
 
 ### E7. Relation similarity
 
