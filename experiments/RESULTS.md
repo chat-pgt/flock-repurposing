@@ -57,4 +57,9 @@ FLOCK's scores here are the published ones. They have not been reproduced in thi
 
 ### E7. Relation similarity
 
-*Pending.*
+| Result | Evidence | Slide |
+|---|---|---|
+| ULTRA gives numerically identical representations to *upregulates* and *downregulates* for Compound, Disease and Anatomy–Gene, and to *treats* and *palliates*, on every query relation outside the pair (relative distance at most 1.3e-7) | `results/e7_relation_similarity.json` | 2 |
+| FLOCK's relation states on *treats* queries show no stable up/down separation. A nearest-centroid probe on held-out drugs scores 49.6%, 47.9% and 56.2% for Compound, Disease and Anatomy–Gene (chance is 50%), against a median of 100% on pairs connecting different entity types | same | 2 |
+
+These are relation states from FLOCK's entity checkpoint, so they do not show that FLOCK cannot distinguish these relations when predicting. FLOCK's *treats* vs *palliates* probe is not reported because *treats* was the query relation.
