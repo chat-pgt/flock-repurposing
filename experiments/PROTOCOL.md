@@ -161,7 +161,7 @@ Priorities are *core*, *extension* and *optional*.
 - **Read-out.** If B approaches 0.94, relation prediction here is mostly types and frequencies. If not,
   FLOCK is genuinely separating relations between the same entity types.
 - **Compute.** CPU.
-- **Status.** Not started.
+- **Status.** Approved and run.
 
 ### E7. Does ULTRA merge up- and downregulates? (optional)
 
