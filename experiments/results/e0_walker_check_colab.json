@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "commit": "2b10143869581efe780d4bd3fbcec440a96826b7",
+    "code_modified_since_commit": false,
+    "seed": 1024,
+    "config": "src_entity/config/zeroshot_transductive/n512_ensemble2.yaml",
+    "cpu_threads_available": 2,
+    "python": "3.12.3",
+    "torch": "2.8.0+cu126",
+    "torch_geometric": "2.4.0",
+    "numpy": "1.26.4"
+  },
+  "walk_tensor_shape": [
+    6,
+    1,
+    1536,
+    128
+  ],
+  "recording": {
+    "hops": 1161216,
+    "recorded_relation_is_the_traversed_one": true,
+    "head_to_tail_hops": {
+      "recorded_r_forward": 0.500833224302605,
+      "recorded_r_inverse_backward": 0.499166775697395
+    },
+    "tail_to_head_hops": {
+      "recorded_r_inverse_forward": 0.4994296446910432,
+      "recorded_r_backward": 0.5005703553089568
+    },
+    "share_matching_appendix_a2": 0.25053220072751325,
+    "true_direction_recoverable_from_type_xor_direction": true,
+    "consecutive_same_relation_hops": 640141,
+    "consecutive_same_relation_share_with_same_anonymous_id": 0.5004928601667445,
+    "query_relation_hops_flagged": 0.5006788491521649
+  },
+  "seeding": {
+    "torch_seed_only_repeats": false,
+    "torch_and_numpy_seed_repeats": true,
+    "seeded_walks_sha256": "31a9f45aef0630c0a553dd4c372d441e9ad26eba494be5aa99372886b640c63d"
+  }
+}
