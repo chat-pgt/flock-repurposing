@@ -42,12 +42,13 @@ def save_shard(path, **arrays):
     os.replace(temporary, path)
 
 
-def run_fold(model, data, graph, split_ids, fold, args, device):
+def run_fold(model, data, graph, split_ids, fold, args, device, plan=None):
     query_ids, answer_ids, folds, known, candidates, treats = split_ids
     position = {int(entity): index for index, entity in enumerate(candidates)}
-    plan = plan_queries(query_ids, folds, fold)
-    if args.max_queries is not None:
-        plan = dict(list(plan.items())[: args.max_queries])
+    if plan is None:
+        plan = plan_queries(query_ids, folds, fold)
+        if args.max_queries is not None:
+            plan = dict(list(plan.items())[: args.max_queries])
 
     edge_rows, query_positions, reciprocal_ranks, hits, above, tied, query_scores = [], [], [], [], [], [], []
     for query_position, (query, rows) in enumerate(plan.items()):
