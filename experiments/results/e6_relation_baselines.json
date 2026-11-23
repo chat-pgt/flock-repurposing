@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "commit": "ac816e6f7ca97378509b4fd9c64d0c1b8d3342eb",
+    "commit": "42e5216eb8e336fde36c2f1687590389ef80affa",
     "code_modified_since_commit": false,
     "python": "3.13.9",
     "numpy": "2.5.5",
@@ -28,21 +28,27 @@
     "uniform_mrr": 0.7785396853613012,
     "uniform_hits1": 0.6203181939383166,
     "frequency_mrr": 0.8849628181198709,
-    "frequency_hits1": 0.796480312861079
+    "frequency_hits1": 0.796480312861079,
+    "signature_mrr": 0.9122043044366043,
+    "signature_hits1": 0.8530263976535419
   },
   "single_candidate": {
     "n_test": 48419,
     "uniform_mrr": 1.0,
     "uniform_hits1": 1.0,
     "frequency_mrr": 1.0,
-    "frequency_hits1": 1.0
+    "frequency_hits1": 1.0,
+    "signature_mrr": 0.9930093470393451,
+    "signature_hits1": 0.9920279229228196
   },
   "several_candidates": {
     "n_test": 64091,
     "uniform_mrr": 0.6112324663369272,
     "uniform_hits1": 0.3334789596043126,
     "frequency_mrr": 0.7980553691886015,
-    "frequency_hits1": 0.6427267479053221
+    "frequency_hits1": 0.6427267479053221,
+    "signature_mrr": 0.8511583017563198,
+    "signature_hits1": 0.7480145418233449
   },
   "per_type_pair": {
     "Anatomy -> Gene": {
@@ -56,7 +62,9 @@
       "uniform_mrr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_mrr": 0.8402295696711941,
-      "frequency_hits1": 0.7249005350528193
+      "frequency_hits1": 0.7249005350528193,
+      "signature_mrr": 0.8392796712593643,
+      "signature_hits1": 0.7246261489916312
     },
     "Gene -> Biological_Process": {
       "relations": [
@@ -67,7 +75,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 1.0,
+      "signature_hits1": 1.0
     },
     "Gene -> Gene": {
       "relations": [
@@ -80,7 +90,9 @@
       "uniform_mrr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_mrr": 0.7546600064908493,
-      "frequency_hits1": 0.5534436777716633
+      "frequency_hits1": 0.5534436777716633,
+      "signature_mrr": 0.8929193300314656,
+      "signature_hits1": 0.8074757651441392
     },
     "Compound -> Side_Effect": {
       "relations": [
@@ -91,7 +103,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 0.9893103448275847,
+      "signature_hits1": 0.9866379310344827
     },
     "Gene -> Molecular_Function": {
       "relations": [
@@ -102,7 +116,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 0.9850852272727273,
+      "signature_hits1": 0.9829545454545454
     },
     "Gene -> Pathway": {
       "relations": [
@@ -113,7 +129,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 0.9881368499099683,
+      "signature_hits1": 0.9866539561487131
     },
     "Gene -> Cellular_Component": {
       "relations": [
@@ -124,7 +142,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 0.9776366648260616,
+      "signature_hits1": 0.9751518498067366
     },
     "Compound -> Gene": {
       "relations": [
@@ -137,7 +157,9 @@
       "uniform_mrr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_mrr": 0.6684334511189635,
-      "frequency_hits1": 0.4122497055359246
+      "frequency_hits1": 0.4122497055359246,
+      "signature_mrr": 0.8217924988243014,
+      "signature_hits1": 0.7071063996859049
     },
     "Disease -> Gene": {
       "relations": [
@@ -150,7 +172,9 @@
       "uniform_mrr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_mrr": 0.669131455399061,
-      "frequency_hits1": 0.4323943661971831
+      "frequency_hits1": 0.4323943661971831,
+      "signature_mrr": 0.5216245019134416,
+      "signature_hits1": 0.43802816901408453
     },
     "Compound -> Compound": {
       "relations": [
@@ -161,7 +185,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 0.9296066252587988,
+      "signature_hits1": 0.9254658385093167
     },
     "Disease -> Anatomy": {
       "relations": [
@@ -172,7 +198,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 0.9946777054997044,
+      "signature_hits1": 0.9943820224719101
     },
     "Disease -> Symptom": {
       "relations": [
@@ -183,7 +211,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 0.9664705882352942,
+      "signature_hits1": 0.9647058823529412
     },
     "Compound -> Disease": {
       "relations": [
@@ -195,7 +225,9 @@
       "uniform_mrr": 0.75,
       "uniform_hits1": 0.5,
       "frequency_mrr": 0.8214285714285714,
-      "frequency_hits1": 0.6428571428571429
+      "frequency_hits1": 0.6428571428571429,
+      "signature_mrr": 0.6570263975155279,
+      "signature_hits1": 0.6071428571428571
     },
     "Pharmacologic_Class -> Compound": {
       "relations": [
@@ -206,7 +238,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 0.4476190476190475,
+      "signature_hits1": 0.42
     },
     "Disease -> Disease": {
       "relations": [
@@ -217,7 +251,9 @@
       "uniform_mrr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_mrr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_mrr": 0.9300106044538706,
+      "signature_hits1": 0.926829268292683
     }
   },
   "per_relation": [
@@ -230,7 +266,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 0.5,
-      "frequency_hits1": 0.0
+      "frequency_hits1": 0.0,
+      "signature_rr": 0.4940003870718019,
+      "signature_hits1": 0.002903038513644281
     },
     {
       "head_type": "Anatomy",
@@ -241,7 +279,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9993439065319151,
+      "signature_hits1": 0.9990158597978728
     },
     {
       "head_type": "Anatomy",
@@ -252,7 +292,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 0.3333333333333333,
-      "frequency_hits1": 0.0
+      "frequency_hits1": 0.0,
+      "signature_rr": 0.3361557835729296,
+      "signature_hits1": 0.00020580366330520683
     },
     {
       "head_type": "Compound",
@@ -263,7 +305,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 0.3333333333333333,
-      "frequency_hits1": 0.0
+      "frequency_hits1": 0.0,
+      "signature_rr": 0.8682291666666663,
+      "signature_hits1": 0.8211805555555556
     },
     {
       "head_type": "Compound",
@@ -274,7 +318,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9893103448275847,
+      "signature_hits1": 0.9866379310344827
     },
     {
       "head_type": "Compound",
@@ -285,7 +331,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9378178963893258,
+      "signature_hits1": 0.9323809523809524
     },
     {
       "head_type": "Compound",
@@ -296,7 +344,9 @@
       "uniform_rr": 0.75,
       "uniform_hits1": 0.5,
       "frequency_rr": 0.5,
-      "frequency_hits1": 0.0
+      "frequency_hits1": 0.0,
+      "signature_rr": 0.6125,
+      "signature_hits1": 0.5
     },
     {
       "head_type": "Compound",
@@ -307,7 +357,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9296066252587988,
+      "signature_hits1": 0.9254658385093167
     },
     {
       "head_type": "Compound",
@@ -318,7 +370,9 @@
       "uniform_rr": 0.75,
       "uniform_hits1": 0.5,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.6817632850241546,
+      "signature_hits1": 0.6666666666666666
     },
     {
       "head_type": "Compound",
@@ -329,7 +383,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 0.5,
-      "frequency_hits1": 0.0
+      "frequency_hits1": 0.0,
+      "signature_rr": 0.6604741621028271,
+      "signature_hits1": 0.3789359391965255
     },
     {
       "head_type": "Disease",
@@ -340,7 +396,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.7544623468279812,
+      "signature_hits1": 0.7361563517915309
     },
     {
       "head_type": "Disease",
@@ -351,7 +409,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 0.3333333333333333,
-      "frequency_hits1": 0.0
+      "frequency_hits1": 0.0,
+      "signature_rr": 0.3315241308493486,
+      "signature_hits1": 0.1970074812967581
     },
     {
       "head_type": "Disease",
@@ -362,7 +422,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9946777054997044,
+      "signature_hits1": 0.9943820224719101
     },
     {
       "head_type": "Disease",
@@ -373,7 +435,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9664705882352942,
+      "signature_hits1": 0.9647058823529412
     },
     {
       "head_type": "Disease",
@@ -384,7 +448,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9300106044538706,
+      "signature_hits1": 0.926829268292683
     },
     {
       "head_type": "Disease",
@@ -395,7 +461,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 0.5,
-      "frequency_hits1": 0.0
+      "frequency_hits1": 0.0,
+      "signature_rr": 0.3568536673928835,
+      "signature_hits1": 0.22469135802469137
     },
     {
       "head_type": "Gene",
@@ -406,7 +474,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 0.3333333333333333,
-      "frequency_hits1": 0.0
+      "frequency_hits1": 0.0,
+      "signature_rr": 0.7117045091141618,
+      "signature_hits1": 0.5251039334825711
     },
     {
       "head_type": "Gene",
@@ -417,7 +487,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 0.5,
-      "frequency_hits1": 0.0
+      "frequency_hits1": 0.0,
+      "signature_rr": 0.7849905685798967,
+      "signature_hits1": 0.5932363244408515
     },
     {
       "head_type": "Gene",
@@ -428,7 +500,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 1.0,
+      "signature_hits1": 1.0
     },
     {
       "head_type": "Gene",
@@ -439,7 +513,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9776366648260616,
+      "signature_hits1": 0.9751518498067366
     },
     {
       "head_type": "Gene",
@@ -450,7 +526,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9850852272727273,
+      "signature_hits1": 0.9829545454545454
     },
     {
       "head_type": "Gene",
@@ -461,7 +539,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.9881368499099683,
+      "signature_hits1": 0.9866539561487131
     },
     {
       "head_type": "Gene",
@@ -472,7 +552,9 @@
       "uniform_rr": 0.611111111111111,
       "uniform_hits1": 0.3333333333333333,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.997531997348427,
+      "signature_hits1": 0.996634541838764
     },
     {
       "head_type": "Pharmacologic_Class",
@@ -483,7 +565,9 @@
       "uniform_rr": 1.0,
       "uniform_hits1": 1.0,
       "frequency_rr": 1.0,
-      "frequency_hits1": 1.0
+      "frequency_hits1": 1.0,
+      "signature_rr": 0.4476190476190475,
+      "signature_hits1": 0.42
     }
   ]
 }
