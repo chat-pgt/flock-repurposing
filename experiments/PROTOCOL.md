@@ -157,9 +157,12 @@ Priorities are *core*, *extension* and *optional*.
   - Baseline A: uniform among relations compatible with (type(h), type(t)). With k candidates, the
     expected reciprocal rank is H_k / k and Hits@1 is 1/k.
   - Baseline B: rank compatible relations by training frequency.
-  - Report overall and per type pair.
-- **Read-out.** If B approaches 0.94, relation prediction here is mostly types and frequencies. If not,
-  FLOCK is genuinely separating relations between the same entity types.
+  - Baseline C: use no entity-type labels, which the models do not receive. Rank first the relations
+    that h has used as a head and t as a tail in training, ordering each group by training frequency.
+  - Report overall and per type pair, including Compound–Disease (*treats* vs *palliates*).
+- **Read-out.** If B or C approaches 0.94, relation prediction here is mostly graph signature and
+  frequency. C is the fairer comparison, because it uses only what the models also see. If FLOCK stays
+  clearly above it, FLOCK is separating relations beyond those counts.
 - **Compute.** CPU.
 - **Status.** Approved and run.
 
