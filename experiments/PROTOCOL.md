@@ -181,7 +181,7 @@ Priorities are *core*, *extension* and *optional*.
 - **Read-out.** ULTRA cosine near 1, well above the controls, demonstrates the paper's motivation on
   pharmacological data. Values close to the controls mean the problem does not bind on Hetionet.
 - **Compute.** GPU, about 60 FLOCK queries.
-- **Status.** Prepared and smoke-tested. Not run.
+- **Status.** Run on a Kaggle T4. Awaiting review.
 
 ---
 
