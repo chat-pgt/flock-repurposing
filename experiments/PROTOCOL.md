@@ -8,8 +8,8 @@ carries over to drug repurposing on [Hetionet](https://het.io), a public biomedi
 ## Background and question
 
 Repurposing can be posed as link prediction: given a drug, rank the diseases it might treat. Hetionet
-v1.0 has 47,031 nodes, 24 relation types and about 2.25 million edges, of which 755 are curated
-Compound–*treats*–Disease edges.
+v1.0 has 47,031 nodes (45,158 with at least one edge), 24 relation types and about 2.25 million edges,
+of which 755 are curated Compound–*treats*–Disease edges.
 
 The paper's zero-shot results on Hetionet (MRR, higher is better) point in two directions:
 
@@ -49,9 +49,9 @@ model. Changing D1–D4, D8 or D9 means rerunning everything that depends on the
 | D1 | **Data.** Official Hetionet v1.0, verified by checksum (`common/get_hetionet.sh`). | A fixed public release. | proposed |
 | D2 | **Split.** Five folds over the 755 *treats* edges, stratified by disease, with a fixed seed. A fold's edges and their inverses are removed from the graph. Results are reported pooled, and separately for drugs with and without another known indication in that fold's training graph. E0 and E6 use the authors' split instead. | 258 edges are their drug's only indication. Holding one out asks for a first indication, which is a different task from finding a new use. E0 and E6 must stay comparable with the paper. | agreed |
 | D3 | **Queries.** Tail only: (compound, *treats*, ?). | Matches the question "which diseases could this drug treat?". The paper averages head and tail queries over all relations, so its Hetionet figures are not directly comparable. | proposed |
-| D4 | **Candidates.** Primary: the 137 diseases. Secondary: all entities. | A drug's indication is always a disease. The secondary view shows the effect of the paper's larger candidate set. | proposed |
+| D4 | **Candidates.** Primary (the headline result): the 136 diseases in the graph. Secondary (a supporting view from the same run): all 45,158 connected entities. | A drug's indication is always a disease. The secondary view shows the effect of the paper's larger candidate set. | proposed |
 | D5 | **Filtering.** Remove other known *treats* pairs from the ranking. Diseases the drug *palliates* stay as competitors. A version that also removes them is reported as a sensitivity check. | The two relations never overlap in Hetionet, so palliated diseases are curated examples of "related, but not disease-modifying". Removing them would hide that error. | agreed |
-| D6 | **Metrics.** MRR and Hits@10 with the exact random baseline. Ties are broken uniformly at random, in expectation, for every model. | The released ranking counts every tie against the target. That would penalise a popularity baseline, where at least 60 diseases share a count of zero. | proposed |
+| D6 | **Metrics.** MRR and Hits@10 with the exact random baseline. Ties are broken uniformly at random, in expectation, for every model. | The released ranking counts every tie against the target. That would penalise a popularity baseline, where at least 59 diseases share a count of zero. | proposed |
 | D7 | **Uncertainty.** At least three walk seeds for stochastic models, averaged per edge. 95% CIs from a two-way bootstrap that resamples drugs and diseases independently (Owen, 2007). Models are compared through paired per-edge differences. | Edges are dependent along both axes: 10 of the 77 treated diseases hold 43% of edges, and 66% of edges come from drugs with several indications. | agreed |
 | D8 | **Models.** Released checkpoints pretrained on FB15k-237, WN18RR and CoDEx-Medium, used zero-shot. ULTRA's public checkpoint on the same three graphs, at a pinned commit. | Same pretraining data for both models. Training-seed variance cannot be measured from a single checkpoint, and results must state this. | proposed |
 | D9 | **FLOCK settings.** The paper's zero-shot Hetionet setting (n = 512, P = 2). A change forced by memory applies to all folds and seeds, and is reported. | Keeps results comparable with the paper and across folds. | proposed |
