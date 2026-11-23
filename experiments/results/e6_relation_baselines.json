@@ -1,0 +1,489 @@
+{
+  "metadata": {
+    "commit": "ac816e6f7ca97378509b4fd9c64d0c1b8d3342eb",
+    "code_modified_since_commit": false,
+    "python": "3.13.9",
+    "numpy": "2.5.5",
+    "data_sha256": {
+      "train.txt": "cc8edc84e9e62a955affc88e21eeba7f272c04d552e53e780624c5b75ad929b2",
+      "test.txt": "53afde5426cb915241887e9a7e83ba979a6bfb43a433cc25e8b552c7ec768728"
+    }
+  },
+  "paper_zero_shot": {
+    "ULTRA": {
+      "mrr": 0.634,
+      "hits1": 0.524
+    },
+    "TRIX": {
+      "mrr": 0.809,
+      "hits1": 0.707
+    },
+    "FLOCK": {
+      "mrr": 0.94,
+      "hits1": 0.89
+    }
+  },
+  "overall": {
+    "n_test": 112510,
+    "uniform_mrr": 0.7785396853613012,
+    "uniform_hits1": 0.6203181939383166,
+    "frequency_mrr": 0.8849628181198709,
+    "frequency_hits1": 0.796480312861079
+  },
+  "single_candidate": {
+    "n_test": 48419,
+    "uniform_mrr": 1.0,
+    "uniform_hits1": 1.0,
+    "frequency_mrr": 1.0,
+    "frequency_hits1": 1.0
+  },
+  "several_candidates": {
+    "n_test": 64091,
+    "uniform_mrr": 0.6112324663369272,
+    "uniform_hits1": 0.3334789596043126,
+    "frequency_mrr": 0.7980553691886015,
+    "frequency_hits1": 0.6427267479053221
+  },
+  "per_type_pair": {
+    "Anatomy -> Gene": {
+      "relations": [
+        "AdG",
+        "AeG",
+        "AuG"
+      ],
+      "n_compatible": 3,
+      "n_test": 36445,
+      "uniform_mrr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_mrr": 0.8402295696711941,
+      "frequency_hits1": 0.7249005350528193
+    },
+    "Gene -> Biological_Process": {
+      "relations": [
+        "GpBP"
+      ],
+      "n_compatible": 1,
+      "n_test": 27952,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    "Gene -> Gene": {
+      "relations": [
+        "GcG",
+        "GiG",
+        "Gr>G"
+      ],
+      "n_compatible": 3,
+      "n_test": 23623,
+      "uniform_mrr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_mrr": 0.7546600064908493,
+      "frequency_hits1": 0.5534436777716633
+    },
+    "Compound -> Side_Effect": {
+      "relations": [
+        "CcSE"
+      ],
+      "n_compatible": 1,
+      "n_test": 6960,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    "Gene -> Molecular_Function": {
+      "relations": [
+        "GpMF"
+      ],
+      "n_compatible": 1,
+      "n_test": 4928,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    "Gene -> Pathway": {
+      "relations": [
+        "GpPW"
+      ],
+      "n_compatible": 1,
+      "n_test": 4196,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    "Gene -> Cellular_Component": {
+      "relations": [
+        "GpCC"
+      ],
+      "n_compatible": 1,
+      "n_test": 3622,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    "Compound -> Gene": {
+      "relations": [
+        "CbG",
+        "CdG",
+        "CuG"
+      ],
+      "n_compatible": 3,
+      "n_test": 2547,
+      "uniform_mrr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_mrr": 0.6684334511189635,
+      "frequency_hits1": 0.4122497055359246
+    },
+    "Disease -> Gene": {
+      "relations": [
+        "DaG",
+        "DdG",
+        "DuG"
+      ],
+      "n_compatible": 3,
+      "n_test": 1420,
+      "uniform_mrr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_mrr": 0.669131455399061,
+      "frequency_hits1": 0.4323943661971831
+    },
+    "Compound -> Compound": {
+      "relations": [
+        "CrC"
+      ],
+      "n_compatible": 1,
+      "n_test": 322,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    "Disease -> Anatomy": {
+      "relations": [
+        "DlA"
+      ],
+      "n_compatible": 1,
+      "n_test": 178,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    "Disease -> Symptom": {
+      "relations": [
+        "DpS"
+      ],
+      "n_compatible": 1,
+      "n_test": 170,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    "Compound -> Disease": {
+      "relations": [
+        "CpD",
+        "CtD"
+      ],
+      "n_compatible": 2,
+      "n_test": 56,
+      "uniform_mrr": 0.75,
+      "uniform_hits1": 0.5,
+      "frequency_mrr": 0.8214285714285714,
+      "frequency_hits1": 0.6428571428571429
+    },
+    "Pharmacologic_Class -> Compound": {
+      "relations": [
+        "PCiC"
+      ],
+      "n_compatible": 1,
+      "n_test": 50,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    "Disease -> Disease": {
+      "relations": [
+        "DrD"
+      ],
+      "n_compatible": 1,
+      "n_test": 41,
+      "uniform_mrr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_mrr": 1.0,
+      "frequency_hits1": 1.0
+    }
+  },
+  "per_relation": [
+    {
+      "head_type": "Anatomy",
+      "relation": "AdG",
+      "tail_type": "Gene",
+      "n_test": 5167,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 0.5,
+      "frequency_hits1": 0.0
+    },
+    {
+      "head_type": "Anatomy",
+      "relation": "AeG",
+      "tail_type": "Gene",
+      "n_test": 26419,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Anatomy",
+      "relation": "AuG",
+      "tail_type": "Gene",
+      "n_test": 4859,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 0.3333333333333333,
+      "frequency_hits1": 0.0
+    },
+    {
+      "head_type": "Compound",
+      "relation": "CbG",
+      "tail_type": "Gene",
+      "n_test": 576,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 0.3333333333333333,
+      "frequency_hits1": 0.0
+    },
+    {
+      "head_type": "Compound",
+      "relation": "CcSE",
+      "tail_type": "Side_Effect",
+      "n_test": 6960,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Compound",
+      "relation": "CdG",
+      "tail_type": "Gene",
+      "n_test": 1050,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Compound",
+      "relation": "CpD",
+      "tail_type": "Disease",
+      "n_test": 20,
+      "n_compatible": 2,
+      "uniform_rr": 0.75,
+      "uniform_hits1": 0.5,
+      "frequency_rr": 0.5,
+      "frequency_hits1": 0.0
+    },
+    {
+      "head_type": "Compound",
+      "relation": "CrC",
+      "tail_type": "Compound",
+      "n_test": 322,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Compound",
+      "relation": "CtD",
+      "tail_type": "Disease",
+      "n_test": 36,
+      "n_compatible": 2,
+      "uniform_rr": 0.75,
+      "uniform_hits1": 0.5,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Compound",
+      "relation": "CuG",
+      "tail_type": "Gene",
+      "n_test": 921,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 0.5,
+      "frequency_hits1": 0.0
+    },
+    {
+      "head_type": "Disease",
+      "relation": "DaG",
+      "tail_type": "Gene",
+      "n_test": 614,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Disease",
+      "relation": "DdG",
+      "tail_type": "Gene",
+      "n_test": 401,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 0.3333333333333333,
+      "frequency_hits1": 0.0
+    },
+    {
+      "head_type": "Disease",
+      "relation": "DlA",
+      "tail_type": "Anatomy",
+      "n_test": 178,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Disease",
+      "relation": "DpS",
+      "tail_type": "Symptom",
+      "n_test": 170,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Disease",
+      "relation": "DrD",
+      "tail_type": "Disease",
+      "n_test": 41,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Disease",
+      "relation": "DuG",
+      "tail_type": "Gene",
+      "n_test": 405,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 0.5,
+      "frequency_hits1": 0.0
+    },
+    {
+      "head_type": "Gene",
+      "relation": "GcG",
+      "tail_type": "Gene",
+      "n_test": 3127,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 0.3333333333333333,
+      "frequency_hits1": 0.0
+    },
+    {
+      "head_type": "Gene",
+      "relation": "GiG",
+      "tail_type": "Gene",
+      "n_test": 7422,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 0.5,
+      "frequency_hits1": 0.0
+    },
+    {
+      "head_type": "Gene",
+      "relation": "GpBP",
+      "tail_type": "Biological_Process",
+      "n_test": 27952,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Gene",
+      "relation": "GpCC",
+      "tail_type": "Cellular_Component",
+      "n_test": 3622,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Gene",
+      "relation": "GpMF",
+      "tail_type": "Molecular_Function",
+      "n_test": 4928,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Gene",
+      "relation": "GpPW",
+      "tail_type": "Pathway",
+      "n_test": 4196,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Gene",
+      "relation": "Gr>G",
+      "tail_type": "Gene",
+      "n_test": 13074,
+      "n_compatible": 3,
+      "uniform_rr": 0.611111111111111,
+      "uniform_hits1": 0.3333333333333333,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    },
+    {
+      "head_type": "Pharmacologic_Class",
+      "relation": "PCiC",
+      "tail_type": "Compound",
+      "n_test": 50,
+      "n_compatible": 1,
+      "uniform_rr": 1.0,
+      "uniform_hits1": 1.0,
+      "frequency_rr": 1.0,
+      "frequency_hits1": 1.0
+    }
+  ]
+}
