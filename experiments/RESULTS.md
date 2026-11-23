@@ -20,7 +20,12 @@ runs.
 
 ### E0. Reproduction and environment
 
-*Pending.*
+| Result | Evidence | Slide |
+|---|---|---|
+| Zero-shot entity prediction reproduces Table 9 on three inductive graphs. MRR is 0.501 vs 0.500 (FB15k-237 v1), 0.698 vs 0.698 (WN18RR v1) and 0.657 vs 0.658 (NELL v1) | `results/e0_zero_shot.json` | |
+| The released walk recording differs from Appendix A.2. Each hop is labeled at random as (r, forward) or (r⁻¹, backward), consecutive hops over the same relation share an anonymous ID 50% of the time, and the query-relation flag fires on 50% of hops over that relation. The effect on performance was not measured | `results/e0_walker_check.json`, `results/e0_walker_check_colab.json` | |
+| `--seed` alone does not make walks repeatable, because the released code does not seed NumPy. With NumPy seeded, walks are identical across runs, CPU counts and machines | same | |
+| On a Colab T4 at n = 512, P = 2 and batch size 1, FLOCK takes about 15 s per Hetionet query and 3.4 GB of GPU memory. This is a timing check on 20 triples, so its MRR is not a result | `results/e0_hetionet_timing.json` | |
 
 ### E1. FLOCK vs ULTRA vs popularity
 

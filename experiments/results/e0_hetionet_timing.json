@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "commit": "2b10143869581efe780d4bd3fbcec440a96826b7",
+    "code_modified_since_commit": false,
+    "seed": 1024,
+    "cpu_threads_available": 2,
+    "python": "3.12.3",
+    "torch": "2.8.0+cu126",
+    "torch_geometric": "2.4.0",
+    "numpy": "1.26.4",
+    "checkpoint_sha256": "d32ae78c0b0b5731ce183fd7e05f6443c03bbb4dd795481d0077818b8ba67850",
+    "device": "Tesla T4"
+  },
+  "runs": [
+    {
+      "dataset": "Hetionet",
+      "config": "src_entity/config/zeroshot_transductive/n512_ensemble2.yaml",
+      "walks_n": 512,
+      "ensemble_p": 2,
+      "batch_size": 1,
+      "test_triples_in_dataset": 112510,
+      "test_triples_evaluated": 20,
+      "full_run": false,
+      "paper_all_relations": {
+        "mrr": 0.246,
+        "hits10": 0.371
+      },
+      "measured": {
+        "mrr": 0.13146917521953583,
+        "hits10": 0.30000001192092896
+      },
+      "mrr_difference": -0.11453082478046417,
+      "within_tolerance": null,
+      "seconds": 594.201117737,
+      "seconds_per_triple": 29.71005588685,
+      "peak_process_memory_gb": 1.9147300720214844,
+      "peak_gpu_memory_gb": 3.4341092109680176
+    }
+  ]
+}
