@@ -14,7 +14,65 @@ import numpy as np
 
 from common.hetionet import EXPERIMENTS, TREATS
 from common.provenance import run_metadata
-from e7_relation_similarity.similarity import TARGET_PAIRS, pca_2d, summarise
+from e7_relation_similarity.similarity import (
+    TARGET_PAIRS,
+    across_pass_cosines,
+    centre,
+    control_pairs,
+    leave_one_query_out_accuracy,
+    pca_2d,
+    relative_distance,
+    summarise,
+)
+
+N_CONTROL_PROBES = 40
+CONTROL_SAMPLE_SEED = 0
+
+
+def ultra_merge_check(all_states, names):
+    """Measure each target pair on query relations outside the pair, where no query marker separates it."""
+    output = {}
+    for label, (first, second) in TARGET_PAIRS.items():
+        i, j = names.index(first), names.index(second)
+        queries = [query for query in range(len(names)) if query not in (i, j)]
+        distances = relative_distance(all_states[queries, i], all_states[queries, j])
+        output[label] = {
+            "n_queries_outside_pair": len(queries),
+            "max_relative_distance": float(distances.max()),
+            "relative_distance_when_first_is_the_query": float(relative_distance(all_states[i, i], all_states[i, j])),
+        }
+    return output
+
+
+def flock_noise_check(states, names, head_kinds, tail_kinds):
+    """Test whether FLOCK's relation differences exceed walk noise and hold across held-out drugs."""
+    centred = centre(states)
+    pairs = {}
+    for label, (first, second) in TARGET_PAIRS.items():
+        i, j = names.index(first), names.index(second)
+        same, different = across_pass_cosines(centred, i, j)
+        pairs[label] = {
+            "same_relation_across_passes": same,
+            "different_relation_across_passes": different,
+            "leave_one_drug_out_accuracy": leave_one_query_out_accuracy(states, i, j),
+            "query_relation_in_pair": TREATS in (first, second),
+        }
+    controls = control_pairs(names, head_kinds, tail_kinds)
+    sample = np.random.default_rng(CONTROL_SAMPLE_SEED).choice(
+        len(controls), size=min(N_CONTROL_PROBES, len(controls)), replace=False
+    )
+    accuracy = [
+        leave_one_query_out_accuracy(states, names.index(controls[k][0]), names.index(controls[k][1]))
+        for k in sample.tolist()
+    ]
+    return {
+        "pairs": pairs,
+        "control_accuracy": {
+            "n_pairs": len(accuracy),
+            "median": float(np.median(accuracy)),
+            "min": float(min(accuracy)),
+        },
+    }
 
 
 def load_ultra(runs):
@@ -25,6 +83,7 @@ def load_ultra(runs):
         names = shard["relation_names"].tolist()
         return {
             "states": shard["states"][names.index(TREATS), : len(names)],
+            "all_states": shard["states"][:, : len(names)],
             "names": names,
             "head_kinds": shard["head_kinds"].tolist(),
             "tail_kinds": shard["tail_kinds"].tolist(),
@@ -71,6 +130,7 @@ def main():
     if ultra:
         results["models"]["ultra"] = {
             **summarise(ultra["states"], ultra["names"], ultra["head_kinds"], ultra["tail_kinds"]),
+            "merge_check": ultra_merge_check(ultra["all_states"], ultra["names"]),
             "pca": pca_output(ultra["states"], ultra["names"]),
         }
     flock = load_flock(args.runs)
@@ -82,6 +142,7 @@ def main():
             "n_seeds": flock["n_seeds"],
             "visited_share": flock["visited_share"],
             "averaged_state": summarise(averaged, flock["names"], flock["head_kinds"], flock["tail_kinds"]),
+            "noise_check": flock_noise_check(flock["states"], flock["names"], flock["head_kinds"], flock["tail_kinds"]),
             "pca": pca_output(averaged, flock["names"]),
         }
     if not results["models"]:
@@ -96,6 +157,19 @@ def main():
                 f"{model} {label} | {targets} | controls median {controls['median']:.3f} "
                 f"[{controls['p05']:.3f}, {controls['p95']:.3f}]"
             )
+    if "ultra" in results["models"]:
+        for label, row in results["models"]["ultra"]["merge_check"].items():
+            print(f"ultra merge | {label}: max relative distance {row['max_relative_distance']:.1e}")
+    if "flock" in results["models"]:
+        check = results["models"]["flock"]["noise_check"]
+        for label, row in check["pairs"].items():
+            marker = " (query relation in pair)" if row["query_relation_in_pair"] else ""
+            print(
+                f"flock noise | {label}{marker}: same across passes {row['same_relation_across_passes']:.3f}, "
+                f"different {row['different_relation_across_passes']:.3f}, "
+                f"held-out accuracy {row['leave_one_drug_out_accuracy']:.3f}"
+            )
+        print(f"flock noise | control pairs: {check['control_accuracy']}")
 
 
 if __name__ == "__main__":

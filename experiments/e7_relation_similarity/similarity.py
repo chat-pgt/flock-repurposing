@@ -45,6 +45,45 @@ def pca_2d(vectors):
     return coordinates, (variance[:2] / max(variance.sum(), 1e-12)).tolist()
 
 
+def relative_distance(first, second):
+    """Return the distance between vectors, relative to their mean norm."""
+    scale = 0.5 * (np.linalg.norm(first, axis=-1) + np.linalg.norm(second, axis=-1))
+    return np.linalg.norm(first - second, axis=-1) / np.maximum(scale, 1e-12)
+
+
+def across_pass_cosines(states, first, second):
+    """Compare one relation across two passes with two different relations across those passes.
+
+    `states` has axes (seed, query, pass, relation, dim). If the two values match, the difference
+    between the relations is no larger than the walk noise.
+    """
+    pass_a, pass_b = states[:, :, 0], states[:, :, 1]
+    same = [cosine(pass_a[..., relation, :], pass_b[..., relation, :]).ravel() for relation in (first, second)]
+    different = [
+        cosine(pass_a[..., first, :], pass_b[..., second, :]).ravel(),
+        cosine(pass_a[..., second, :], pass_b[..., first, :]).ravel(),
+    ]
+    return float(np.concatenate(same).mean()), float(np.concatenate(different).mean())
+
+
+def leave_one_query_out_accuracy(states, first, second):
+    """Label held-out vectors as one of two relations with nearest centroids. Chance is 0.5."""
+    dim = states.shape[-1]
+    correct = total = 0
+    for held in range(states.shape[1]):
+        train = np.delete(states, held, axis=1)
+        centroid_first = train[..., first, :].reshape(-1, dim).mean(axis=0)
+        centroid_second = train[..., second, :].reshape(-1, dim).mean(axis=0)
+        for relation, is_second in ((first, False), (second, True)):
+            vectors = states[:, held, :, relation, :].reshape(-1, dim)
+            nearer_second = np.linalg.norm(vectors - centroid_second, axis=1) < np.linalg.norm(
+                vectors - centroid_first, axis=1
+            )
+            correct += int((nearer_second == is_second).sum())
+            total += len(vectors)
+    return correct / total
+
+
 def summarise(states, names, head_kinds, tail_kinds):
     """Summarise raw and centred cosines for target pairs against control pairs."""
     controls = control_pairs(names, head_kinds, tail_kinds)

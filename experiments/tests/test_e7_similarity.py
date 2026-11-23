@@ -1,7 +1,45 @@
 import numpy as np
 import pytest
 
-from e7_relation_similarity.similarity import centre, control_pairs, cosine, pair_cosines, pca_2d, summarise
+from e7_relation_similarity.similarity import (
+    across_pass_cosines,
+    centre,
+    control_pairs,
+    cosine,
+    leave_one_query_out_accuracy,
+    pair_cosines,
+    pca_2d,
+    relative_distance,
+    summarise,
+)
+
+
+def noisy_states(gap, seed=0):
+    """Build (seed, query, pass, relation, dim) states with a fixed gap between two relations."""
+    rng = np.random.default_rng(seed)
+    states = rng.normal(0, 1, (2, 12, 2, 2, 8))
+    states[..., 1, 0] += gap
+    return states
+
+
+def test_relative_distance_is_zero_for_identical_vectors():
+    vector = np.array([3.0, 4.0])
+
+    assert relative_distance(vector, vector) == 0
+    assert relative_distance(vector, -vector) == pytest.approx(2.0)
+
+
+def test_across_pass_cosines_detect_a_stable_difference():
+    states = np.zeros((1, 1, 2, 2, 2))
+    states[..., 0, :] = [1.0, 0.0]
+    states[..., 1, :] = [0.0, 1.0]
+
+    assert across_pass_cosines(states, 0, 1) == pytest.approx((1.0, 0.0))
+
+
+def test_held_out_accuracy_separates_real_differences_from_noise():
+    assert leave_one_query_out_accuracy(noisy_states(gap=20.0), 0, 1) == 1.0
+    assert leave_one_query_out_accuracy(noisy_states(gap=0.0), 0, 1) == pytest.approx(0.5, abs=0.15)
 
 
 def test_cosine_works_along_the_last_axis():
