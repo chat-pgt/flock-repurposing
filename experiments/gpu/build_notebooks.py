@@ -6,6 +6,7 @@ code over them, so it needs no access token for this repository.
 Usage, from experiments/: uv run python gpu/build_notebooks.py
 """
 
+import argparse
 import base64
 import json
 import subprocess
@@ -38,6 +39,13 @@ E2_INTRO = f"""# E2: ablation of *resembles* edges
 
 Reruns FLOCK and ULTRA on the drug → disease queries after removing all *resembles* edges from the graph.
 Compare it with the E1 notebook, which uses the same folds and seeds on the full graph.
+
+{HOW_TO_RUN}"""
+
+E2_SEED2_INTRO = f"""# E2: third FLOCK seed of the *resembles* ablation
+
+Adds walk seed 2 to the E2 ablation. Run it only if E1 completed seed 2 of drug → disease, because the two
+are compared seed by seed. ULTRA is deterministic, so the main E2 notebook already covers it.
 
 {HOW_TO_RUN}"""
 
@@ -150,6 +158,19 @@ E2_STAGES = [
 )""",
 ]
 
+E2_SEED2_STAGES = [
+    """stage(
+    "gpu.run_entity",
+    f"--model flock --direction tail --condition no_resembles --seeds 2 --output-dir {OUTPUT}/runs",
+)""",
+]
+
+NOTEBOOKS = {
+    "gpu_e1": (E1_INTRO, E1_STAGES),
+    "gpu_e2": (E2_INTRO, E2_STAGES),
+    "gpu_e2_seed2": (E2_SEED2_INTRO, E2_SEED2_STAGES),
+}
+
 SUMMARY = """sh(f"{PYTHON} -m gpu.summarise_runs --runs {OUTPUT}/runs 2>&1 | tee {OUTPUT}/{NOTEBOOK}_summary.txt",
    check=False, cwd=REPO / "experiments")"""
 
@@ -198,6 +219,9 @@ def build(name, intro, stages, get_code, commit, upstream):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("names", nargs="*", choices=[[], *NOTEBOOKS], help="Notebooks to build (default: all)")
+    args = parser.parse_args()
     upstream = git("rev-parse", "upstream/main").strip()
     if git("diff", "--name-only", upstream, "HEAD", "--", "src_entity", "src_relation", "graph-walker", "checkpoints"):
         raise SystemExit("upstream code differs from HEAD, so a clean upstream clone would not match this commit")
@@ -205,8 +229,9 @@ def main():
     get_code = GET_CODE.replace("__BUNDLE__", base64.b64encode(archive).decode())
     commit = git("rev-parse", "HEAD").strip()
     OUTPUT_DIR.mkdir(exist_ok=True)
-    build("gpu_e1", E1_INTRO, E1_STAGES, get_code, commit, upstream)
-    build("gpu_e2", E2_INTRO, E2_STAGES, get_code, commit, upstream)
+    for name in args.names or NOTEBOOKS:
+        intro, stages = NOTEBOOKS[name]
+        build(name, intro, stages, get_code, commit, upstream)
 
 
 if __name__ == "__main__":
