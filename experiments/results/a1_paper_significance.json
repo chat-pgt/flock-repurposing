@@ -1,0 +1,665 @@
+{
+  "comparisons": [
+    {
+      "task": "Entity zero-shot",
+      "baseline": "TRIX",
+      "split": "All 54",
+      "n": 54,
+      "flock_mean": 0.39120370370370366,
+      "baseline_mean": 0.39005555555555554,
+      "mean_diff": 0.0011481481481481481,
+      "wins": 32,
+      "losses": 21,
+      "ties": 1,
+      "ci95": [
+        -0.01035185185185185,
+        0.01238888888888889
+      ],
+      "wilcoxon_p": 0.35715706221068366,
+      "family_p": 0.111328125,
+      "n_families": 12,
+      "wilcoxon_p_holm": 0.35715706221068366,
+      "family_p_holm": 0.333984375
+    },
+    {
+      "task": "Entity zero-shot",
+      "baseline": "TRIX",
+      "split": "Inductive e, r",
+      "n": 23,
+      "flock_mean": 0.3693478260869565,
+      "baseline_mean": 0.3679130434782609,
+      "mean_diff": 0.0014347826086956535,
+      "wins": 13,
+      "losses": 10,
+      "ties": 0,
+      "ci95": [
+        -0.013173913043478263,
+        0.018218478260869475
+      ],
+      "wilcoxon_p": 0.9757305077578793,
+      "family_p": 0.5,
+      "n_families": 5
+    },
+    {
+      "task": "Entity zero-shot",
+      "baseline": "TRIX",
+      "split": "Inductive e",
+      "n": 18,
+      "flock_mean": 0.45588888888888895,
+      "baseline_mean": 0.45538888888888895,
+      "mean_diff": 0.0005000000000000019,
+      "wins": 12,
+      "losses": 6,
+      "ties": 0,
+      "ci95": [
+        -0.020166666666666666,
+        0.014666666666666668
+      ],
+      "wilcoxon_p": 0.10701737242953377,
+      "family_p": 0.8125,
+      "n_families": 5
+    },
+    {
+      "task": "Entity zero-shot",
+      "baseline": "TRIX",
+      "split": "Transductive",
+      "n": 13,
+      "flock_mean": 0.34030769230769226,
+      "baseline_mean": 0.3387692307692307,
+      "mean_diff": 0.0015384615384615382,
+      "wins": 7,
+      "losses": 5,
+      "ties": 1,
+      "ci95": [
+        -0.026538461538461542,
+        0.03069423076923061
+      ],
+      "wilcoxon_p": 0.90966796875,
+      "family_p": 0.5234375,
+      "n_families": 8
+    },
+    {
+      "task": "Entity zero-shot",
+      "baseline": "ULTRA",
+      "split": "All 54",
+      "n": 54,
+      "flock_mean": 0.39120370370370366,
+      "baseline_mean": 0.3657222222222223,
+      "mean_diff": 0.02548148148148148,
+      "wins": 40,
+      "losses": 14,
+      "ties": 0,
+      "ci95": [
+        0.01112962962962963,
+        0.04088888888888889
+      ],
+      "wilcoxon_p": 0.0006397224321266933,
+      "family_p": 0.0224609375,
+      "n_families": 12,
+      "wilcoxon_p_holm": 0.0019191672963800798,
+      "family_p_holm": 0.08984375
+    },
+    {
+      "task": "Entity zero-shot",
+      "baseline": "ULTRA",
+      "split": "Inductive e, r",
+      "n": 23,
+      "flock_mean": 0.3693478260869565,
+      "baseline_mean": 0.34547826086956523,
+      "mean_diff": 0.023869565217391305,
+      "wins": 17,
+      "losses": 6,
+      "ties": 0,
+      "ci95": [
+        0.0019989130434782602,
+        0.050261956521739044
+      ],
+      "wilcoxon_p": 0.07271968517762482,
+      "family_p": 0.25,
+      "n_families": 5
+    },
+    {
+      "task": "Entity zero-shot",
+      "baseline": "ULTRA",
+      "split": "Inductive e",
+      "n": 18,
+      "flock_mean": 0.45588888888888895,
+      "baseline_mean": 0.43066666666666664,
+      "mean_diff": 0.025222222222222226,
+      "wins": 16,
+      "losses": 2,
+      "ties": 0,
+      "ci95": [
+        0.002055555555555554,
+        0.04405555555555555
+      ],
+      "wilcoxon_p": 0.005678762213784087,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Entity zero-shot",
+      "baseline": "ULTRA",
+      "split": "Transductive",
+      "n": 13,
+      "flock_mean": 0.34030769230769226,
+      "baseline_mean": 0.3116153846153846,
+      "mean_diff": 0.02869230769230769,
+      "wins": 7,
+      "losses": 6,
+      "ties": 0,
+      "ci95": [
+        -0.0011538461538461537,
+        0.06353846153846153
+      ],
+      "wilcoxon_p": 0.454833984375,
+      "family_p": 0.1484375,
+      "n_families": 8
+    },
+    {
+      "task": "Entity fine-tuned",
+      "baseline": "TRIX",
+      "split": "All 54",
+      "n": 54,
+      "flock_mean": 0.4273703703703704,
+      "baseline_mean": 0.4177592592592592,
+      "mean_diff": 0.009611111111111112,
+      "wins": 37,
+      "losses": 17,
+      "ties": 0,
+      "ci95": [
+        0.002277314814814814,
+        0.01651851851851852
+      ],
+      "wilcoxon_p": 0.002021638360640199,
+      "family_p": 0.4365234375,
+      "n_families": 12,
+      "wilcoxon_p_holm": 0.004043276721280398,
+      "family_p_holm": 0.4365234375
+    },
+    {
+      "task": "Entity fine-tuned",
+      "baseline": "TRIX",
+      "split": "Inductive e, r",
+      "n": 23,
+      "flock_mean": 0.41673913043478256,
+      "baseline_mean": 0.4013478260869565,
+      "mean_diff": 0.015391304347826089,
+      "wins": 17,
+      "losses": 6,
+      "ties": 0,
+      "ci95": [
+        0.006739130434782609,
+        0.02356521739130435
+      ],
+      "wilcoxon_p": 0.0034964734413284867,
+      "family_p": 0.125,
+      "n_families": 5
+    },
+    {
+      "task": "Entity fine-tuned",
+      "baseline": "TRIX",
+      "split": "Inductive e",
+      "n": 18,
+      "flock_mean": 0.47277777777777774,
+      "baseline_mean": 0.4587222222222222,
+      "mean_diff": 0.014055555555555556,
+      "wins": 13,
+      "losses": 5,
+      "ties": 0,
+      "ci95": [
+        0.002722222222222223,
+        0.025168055555555437
+      ],
+      "wilcoxon_p": 0.02940348997658956,
+      "family_p": 0.1875,
+      "n_families": 5
+    },
+    {
+      "task": "Entity fine-tuned",
+      "baseline": "TRIX",
+      "split": "Transductive",
+      "n": 13,
+      "flock_mean": 0.3833076923076923,
+      "baseline_mean": 0.39007692307692304,
+      "mean_diff": -0.00676923076923077,
+      "wins": 7,
+      "losses": 6,
+      "ties": 0,
+      "ci95": [
+        -0.026000000000000002,
+        0.01
+      ],
+      "wilcoxon_p": 0.98583984375,
+      "family_p": 0.7734375,
+      "n_families": 8
+    },
+    {
+      "task": "Entity fine-tuned",
+      "baseline": "ULTRA",
+      "split": "All 54",
+      "n": 54,
+      "flock_mean": 0.4273703703703704,
+      "baseline_mean": 0.40703703703703703,
+      "mean_diff": 0.020333333333333335,
+      "wins": 42,
+      "losses": 12,
+      "ties": 0,
+      "ci95": [
+        0.011981481481481484,
+        0.02868564814814811
+      ],
+      "wilcoxon_p": 1.1027165397285384e-05,
+      "family_p": 0.14697265625,
+      "n_families": 12,
+      "wilcoxon_p_holm": 4.4108661589141535e-05,
+      "family_p_holm": 0.333984375
+    },
+    {
+      "task": "Entity fine-tuned",
+      "baseline": "ULTRA",
+      "split": "Inductive e, r",
+      "n": 23,
+      "flock_mean": 0.41673913043478256,
+      "baseline_mean": 0.39691304347826084,
+      "mean_diff": 0.01982608695652174,
+      "wins": 17,
+      "losses": 6,
+      "ties": 0,
+      "ci95": [
+        0.007782608695652174,
+        0.03260978260869557
+      ],
+      "wilcoxon_p": 0.011087075360112966,
+      "family_p": 0.125,
+      "n_families": 5
+    },
+    {
+      "task": "Entity fine-tuned",
+      "baseline": "ULTRA",
+      "split": "Inductive e",
+      "n": 18,
+      "flock_mean": 0.47277777777777774,
+      "baseline_mean": 0.44033333333333335,
+      "mean_diff": 0.03244444444444445,
+      "wins": 17,
+      "losses": 1,
+      "ties": 0,
+      "ci95": [
+        0.020722222222222222,
+        0.04527777777777778
+      ],
+      "wilcoxon_p": 0.00041739494386034705,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Entity fine-tuned",
+      "baseline": "ULTRA",
+      "split": "Transductive",
+      "n": 13,
+      "flock_mean": 0.3833076923076923,
+      "baseline_mean": 0.3788461538461539,
+      "mean_diff": 0.004461538461538462,
+      "wins": 8,
+      "losses": 5,
+      "ties": 0,
+      "ci95": [
+        -0.014769230769230769,
+        0.02
+      ],
+      "wilcoxon_p": 0.2734375,
+      "family_p": 0.7578125,
+      "n_families": 8
+    },
+    {
+      "task": "Relation zero-shot",
+      "baseline": "TRIX",
+      "split": "All 54",
+      "n": 54,
+      "flock_mean": 0.881,
+      "baseline_mean": 0.7916111111111112,
+      "mean_diff": 0.08938888888888889,
+      "wins": 53,
+      "losses": 1,
+      "ties": 0,
+      "ci95": [
+        0.07505555555555556,
+        0.10468518518518516
+      ],
+      "wilcoxon_p": 1.9218071795080808e-10,
+      "family_p": 0.00048828125,
+      "n_families": 12,
+      "wilcoxon_p_holm": 1.299550882508712e-09,
+      "family_p_holm": 0.00390625
+    },
+    {
+      "task": "Relation zero-shot",
+      "baseline": "TRIX",
+      "split": "Inductive e, r",
+      "n": 23,
+      "flock_mean": 0.8983043478260868,
+      "baseline_mean": 0.8421739130434784,
+      "mean_diff": 0.0561304347826087,
+      "wins": 22,
+      "losses": 1,
+      "ties": 0,
+      "ci95": [
+        0.04034782608695653,
+        0.07426195652173904
+      ],
+      "wilcoxon_p": 4.017106513260345e-05,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Relation zero-shot",
+      "baseline": "TRIX",
+      "split": "Inductive e",
+      "n": 18,
+      "flock_mean": 0.8644444444444445,
+      "baseline_mean": 0.7559444444444444,
+      "mean_diff": 0.1085,
+      "wins": 18,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.0853875,
+        0.13233333333333333
+      ],
+      "wilcoxon_p": 0.00019609335453373022,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Relation zero-shot",
+      "baseline": "TRIX",
+      "split": "Transductive",
+      "n": 13,
+      "flock_mean": 0.8733076923076923,
+      "baseline_mean": 0.7515384615384615,
+      "mean_diff": 0.12176923076923078,
+      "wins": 13,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.09384615384615386,
+        0.15038461538461537
+      ],
+      "wilcoxon_p": 0.000244140625,
+      "family_p": 0.0078125,
+      "n_families": 8
+    },
+    {
+      "task": "Relation zero-shot",
+      "baseline": "ULTRA",
+      "split": "All 54",
+      "n": 54,
+      "flock_mean": 0.881,
+      "baseline_mean": 0.7236851851851852,
+      "mean_diff": 0.15731481481481482,
+      "wins": 54,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.12883333333333333,
+        0.18800046296296294
+      ],
+      "wilcoxon_p": 1.62443860313589e-10,
+      "family_p": 0.00048828125,
+      "n_families": 12,
+      "wilcoxon_p_holm": 1.299550882508712e-09,
+      "family_p_holm": 0.00390625
+    },
+    {
+      "task": "Relation zero-shot",
+      "baseline": "ULTRA",
+      "split": "Inductive e, r",
+      "n": 23,
+      "flock_mean": 0.8983043478260868,
+      "baseline_mean": 0.7848260869565217,
+      "mean_diff": 0.11347826086956521,
+      "wins": 23,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.07891304347826086,
+        0.15191413043478255
+      ],
+      "wilcoxon_p": 2.695812077387092e-05,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Relation zero-shot",
+      "baseline": "ULTRA",
+      "split": "Inductive e",
+      "n": 18,
+      "flock_mean": 0.8644444444444445,
+      "baseline_mean": 0.7139444444444446,
+      "mean_diff": 0.1505,
+      "wins": 18,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.11844444444444445,
+        0.1834458333333332
+      ],
+      "wilcoxon_p": 7.62939453125e-06,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Relation zero-shot",
+      "baseline": "ULTRA",
+      "split": "Transductive",
+      "n": 13,
+      "flock_mean": 0.8733076923076923,
+      "baseline_mean": 0.6290000000000001,
+      "mean_diff": 0.2443076923076923,
+      "wins": 13,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.1756903846153846,
+        0.32669230769230767
+      ],
+      "wilcoxon_p": 0.000244140625,
+      "family_p": 0.0078125,
+      "n_families": 8
+    },
+    {
+      "task": "Relation fine-tuned",
+      "baseline": "TRIX",
+      "split": "All 54",
+      "n": 54,
+      "flock_mean": 0.907111111111111,
+      "baseline_mean": 0.8043148148148147,
+      "mean_diff": 0.10279629629629629,
+      "wins": 54,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.07905555555555556,
+        0.13472314814814806
+      ],
+      "wilcoxon_p": 1.62443860313589e-10,
+      "family_p": 0.00048828125,
+      "n_families": 12,
+      "wilcoxon_p_holm": 1.299550882508712e-09,
+      "family_p_holm": 0.00390625
+    },
+    {
+      "task": "Relation fine-tuned",
+      "baseline": "TRIX",
+      "split": "Inductive e, r",
+      "n": 23,
+      "flock_mean": 0.9288260869565219,
+      "baseline_mean": 0.8509130434782611,
+      "mean_diff": 0.07791304347826088,
+      "wins": 23,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.03834782608695653,
+        0.14387065217391296
+      ],
+      "wilcoxon_p": 2.695812077387092e-05,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Relation fine-tuned",
+      "baseline": "TRIX",
+      "split": "Inductive e",
+      "n": 18,
+      "flock_mean": 0.8867222222222222,
+      "baseline_mean": 0.7585555555555555,
+      "mean_diff": 0.12816666666666668,
+      "wins": 18,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.10383333333333335,
+        0.15589027777777767
+      ],
+      "wilcoxon_p": 0.00019575042504300203,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Relation fine-tuned",
+      "baseline": "TRIX",
+      "split": "Transductive",
+      "n": 13,
+      "flock_mean": 0.8969230769230769,
+      "baseline_mean": 0.7852307692307693,
+      "mean_diff": 0.11169230769230769,
+      "wins": 13,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.08300000000000002,
+        0.13753846153846155
+      ],
+      "wilcoxon_p": 0.000244140625,
+      "family_p": 0.0078125,
+      "n_families": 8
+    },
+    {
+      "task": "Relation fine-tuned",
+      "baseline": "ULTRA",
+      "split": "All 54",
+      "n": 54,
+      "flock_mean": 0.907111111111111,
+      "baseline_mean": 0.7625555555555557,
+      "mean_diff": 0.14455555555555558,
+      "wins": 54,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.11574027777777778,
+        0.1768333333333333
+      ],
+      "wilcoxon_p": 1.62443860313589e-10,
+      "family_p": 0.00048828125,
+      "n_families": 12,
+      "wilcoxon_p_holm": 1.299550882508712e-09,
+      "family_p_holm": 0.00390625
+    },
+    {
+      "task": "Relation fine-tuned",
+      "baseline": "ULTRA",
+      "split": "Inductive e, r",
+      "n": 23,
+      "flock_mean": 0.9288260869565219,
+      "baseline_mean": 0.8304347826086957,
+      "mean_diff": 0.09839130434782609,
+      "wins": 23,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.056086956521739124,
+        0.15865217391304345
+      ],
+      "wilcoxon_p": 2.384185791015625e-07,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Relation fine-tuned",
+      "baseline": "ULTRA",
+      "split": "Inductive e",
+      "n": 18,
+      "flock_mean": 0.8867222222222222,
+      "baseline_mean": 0.7159444444444445,
+      "mean_diff": 0.1707777777777778,
+      "wins": 18,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.13655416666666664,
+        0.20538888888888887
+      ],
+      "wilcoxon_p": 0.00019575042504300203,
+      "family_p": 0.0625,
+      "n_families": 5
+    },
+    {
+      "task": "Relation fine-tuned",
+      "baseline": "ULTRA",
+      "split": "Transductive",
+      "n": 13,
+      "flock_mean": 0.8969230769230769,
+      "baseline_mean": 0.7070000000000001,
+      "mean_diff": 0.18992307692307694,
+      "wins": 13,
+      "losses": 0,
+      "ties": 0,
+      "ci95": [
+        0.13307692307692306,
+        0.2469230769230769
+      ],
+      "wilcoxon_p": 0.000244140625,
+      "family_p": 0.0078125,
+      "n_families": 8
+    }
+  ],
+  "robustness": {
+    "entity_zero_shot_vs_trix_without_metafam": -0.0013773584905660374,
+    "entity_zero_shot_vs_trix_without_metafam_aristo": -0.0038461538461538455,
+    "entity_zero_shot_hits10_vs_trix": {
+      "n": 54,
+      "flock_mean": 0.560037037037037,
+      "baseline_mean": 0.5479814814814815,
+      "mean_diff": 0.012055555555555555,
+      "wins": 39,
+      "losses": 15,
+      "ties": 0,
+      "ci95": [
+        0.0011296296296296289,
+        0.023499999999999997
+      ],
+      "wilcoxon_p": 0.0023322984764793065,
+      "family_p": 0.03662109375,
+      "n_families": 12
+    },
+    "fine_tuning_effect_entity": {
+      "ULTRA": {
+        "mean": 0.0413148148148148,
+        "worse": 14,
+        "unchanged": 0
+      },
+      "TRIX": {
+        "mean": 0.027703703703703696,
+        "worse": 4,
+        "unchanged": 19
+      },
+      "FLOCK": {
+        "mean": 0.036166666666666666,
+        "worse": 5,
+        "unchanged": 3
+      }
+    }
+  }
+}

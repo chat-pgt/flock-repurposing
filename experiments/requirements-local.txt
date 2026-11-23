@@ -1,0 +1,4 @@
+# CPU-only analysis (paper tables, Hetionet baselines). GPU runs use the environment in the root README.
+numpy==2.5.5
+pandas==3.1.1
+scipy==1.18.1
