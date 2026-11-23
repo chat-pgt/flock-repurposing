@@ -1,0 +1,19 @@
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [experiments]
+
+permissions:
+  contents: read
+
+jobs:
+  hooks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: pipx install uv==0.12.8
+      - run: uv sync --project experiments --frozen
+      - run: uv run --project experiments --frozen pre-commit run --all-files --show-diff-on-failure

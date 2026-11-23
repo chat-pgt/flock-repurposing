@@ -182,8 +182,10 @@ Priorities are *core*, *extension* and *optional*.
 
 ## 3. Reproducibility
 
-- **CPU environment.** `uv sync` in `experiments/` installs the locked analysis environment. Run
-  `uv run pytest` and `uv run ruff check .` before committing.
+- **CPU environment.** `uv sync` in `experiments/` installs the locked analysis environment.
+- **Commit hooks.** `uv run pre-commit install`, once per clone. The hooks strip notebook outputs, run
+  ruff and the tests, verify the lockfile, block large files and private keys, and check that commit
+  messages are one-line and conventional. The same file checks run on every pull request.
 - **GPU environment.** The base image fixes PyTorch and CUDA, so E0 records the exact packages with
   `pip freeze` in `requirements-gpu.txt`.
 - **Seeds.** The released code does not seed NumPy, which drives walk sampling, so `--seed` alone does
