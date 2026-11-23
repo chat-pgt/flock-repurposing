@@ -77,7 +77,7 @@ Priorities are *core*, *extension* and *optional*.
 - **Read-out.** Agreement with Table 9 within about 0.01 validates the setup. If the GPU environment
   cannot be built, the CPU experiments (E2, E6 and E1's popularity baseline) still stand.
 - **Compute.** CPU for the walker checks, GPU for the rest.
-- **Status.** Approved, in progress.
+- **Status.** Run on CPU and a Colab T4. Awaiting review.
 
 ### E1. FLOCK vs ULTRA vs popularity (core)
 
