@@ -132,17 +132,18 @@ def seed_checks(model, data, head, seed):
 
 
 def metadata(seed):
-    commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=REPO, capture_output=True, text=True, check=True)
-    dirty = subprocess.run(
-        ["git", "status", "--porcelain", "--", "src_entity", "graph-walker", "experiments/e0_reproduction"],
-        cwd=REPO,
-        capture_output=True,
-        text=True,
-        check=True,
-    )
+    def git(*arguments):
+        return subprocess.run(["git", *arguments], cwd=REPO, capture_output=True, text=True, check=True).stdout.strip()
+
+    # The Kaggle notebook unpacks this code over a clean upstream clone and passes its source commit.
+    checked_paths = ["src_entity", "graph-walker"]
+    commit = os.environ.get("EXPERIMENT_COMMIT")
+    if commit is None:
+        commit = git("rev-parse", "HEAD")
+        checked_paths.append("experiments/e0_reproduction")
     return {
-        "commit": commit.stdout.strip(),
-        "code_modified_since_commit": bool(dirty.stdout.strip()),
+        "commit": commit,
+        "code_modified_since_commit": bool(git("status", "--porcelain", "--", *checked_paths)),
         "seed": seed,
         "config": CONFIG,
         "cpu_threads_available": len(os.sched_getaffinity(0)),
