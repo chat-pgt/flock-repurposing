@@ -30,13 +30,23 @@ INSTRUCTIONS = """# E0: reproduce FLOCK zero-shot results
 The notebook checks the walker, runs three small inductive graphs for comparison with Table 9, and
 times 20 Hetionet triples at the paper's zero-shot setting (n = 512, P = 2)."""
 
-SETUP = """import base64, importlib.util, io, json, os, subprocess, tarfile
+SETUP = """import base64, io, json, os, subprocess, tarfile
 from pathlib import Path
 
 EXPERIMENT_COMMIT = "__COMMIT__"
 UPSTREAM_COMMIT = "__UPSTREAM__"
 WORK = Path(os.environ.get("E0_WORK", "/tmp/e0"))
-ON_COLAB = importlib.util.find_spec("google.colab") is not None and "KAGGLE_KERNEL_RUN_TYPE" not in os.environ
+
+
+def running_on_colab():
+    try:
+        import google.colab
+    except ImportError:
+        return False
+    return "KAGGLE_KERNEL_RUN_TYPE" not in os.environ
+
+
+ON_COLAB = running_on_colab()
 OUTPUT = Path(os.environ.get("E0_OUTPUT", "/content/e0_output" if ON_COLAB else "/kaggle/working"))
 REPO = WORK / "flock"
 PYTHON = Path(os.environ.get("E0_PYTHON", WORK / "env/bin/python"))
