@@ -111,13 +111,14 @@ Priorities are *core*, *extension* and *optional*.
 - **Origin.** The paper says shorter walks degrade results "as expected from coverage". Why is that
   expected, and what justifies the choice of walk length ℓ and walk count n?
 - **Question.** Does walk coverage explain FLOCK's Hetionet result?
-- **Design.** Sweep (n, ℓ) with n·ℓ fixed, and vary n alone. Separately, remove high-volume relations
-  that lie off the drug–disease paths (for example Anatomy–*expresses*–Gene). With the released
-  checkpoint, ℓ > 128 needs retraining and ℓ < 128 needs a small patch.
-- **Read-out.** If performance tracks n·ℓ, coverage matters. If it does not move, the explanation lies
-  elsewhere. The relation-removal arm shows whether the design of the graph matters.
-- **Compute.** GPU.
-- **Status.** Not started.
+- **Design.** On a fixed sample of 200 drug → disease queries, vary n alone (64, 128, 256), sweep (n, ℓ)
+  with n·ℓ fixed ((1024, 64) and (2048, 32)), and remove Anatomy–*expresses*–Gene from the graph. The
+  reference (512, 128) and the noise floor between walk seeds come from E1 on the same edges. With the
+  released checkpoint, ℓ > 128 needs retraining and ℓ < 128 reuses the trained tables.
+- **Read-out.** If performance tracks n·ℓ beyond the noise floor, coverage matters. If it does not move,
+  the explanation lies elsewhere. The relation-removal arm shows whether the design of the graph matters.
+- **Compute.** GPU, about 2.5 hours.
+- **Status.** Approved in reduced scope. Prepared and smoke-tested, not run.
 
 ### E4. Walk explanations (extension)
 
