@@ -4,6 +4,7 @@ Usage: python dataset_summary.py path/to/flock.pdf
 Requires `pdftotext`. Sizes use the inference graph for inductive KGs and the training graph for
 transductive ones. Each group's ranges include any pretraining graph from that source.
 """
+
 import re
 import statistics
 import subprocess
@@ -32,7 +33,9 @@ def source(name):
 
 
 def load(pdf):
-    lines = subprocess.run(["pdftotext", "-layout", pdf, "-"], capture_output=True, text=True, check=True).stdout.split("\n")
+    lines = subprocess.run(["pdftotext", "-layout", pdf, "-"], capture_output=True, text=True, check=True).stdout.split(
+        "\n"
+    )
     start = {n: next(i for i, l in enumerate(lines) if re.match(rf"\s*Table {n}: ", l)) for n in (13, 14, 15, 16)}
     rows = []  # (name, nodes, relations, edges)
     for line in lines[start[13] : start[14]]:
@@ -60,4 +63,6 @@ if __name__ == "__main__":
     for key, rows in groups.items():
         nodes, relations, edges = zip(*[row[1:] for row in rows])
         density = statistics.median(row[3] / row[1] for row in rows)
-        print(f"{key} | {len(rows)} | {min(nodes)}-{max(nodes)} | {min(relations)}-{max(relations)} | {min(edges)}-{max(edges)} | {density:.1f}")
+        print(
+            f"{key} | {len(rows)} | {min(nodes)}-{max(nodes)} | {min(relations)}-{max(relations)} | {min(edges)}-{max(edges)} | {density:.1f}"
+        )

@@ -1,0 +1,57 @@
+{
+  "table_8a_baseline": {
+    "table_8a_trix": [
+      0.366,
+      0.518
+    ],
+    "table_8a_trix_with_noise": [
+      0.385,
+      0.545
+    ],
+    "table_2_ultra": [
+      0.366,
+      0.518
+    ],
+    "table_2_trix": [
+      0.39,
+      0.548
+    ],
+    "table_8a_equals_table_2_ultra": true,
+    "noise_effect_if_table_2_is_right": -0.005
+  },
+  "table_9_per_kg_means": {
+    "ultra_mrr": 0.366,
+    "trix_mrr": 0.39,
+    "ultra_hits10": 0.518,
+    "trix_hits10": 0.548
+  },
+  "figure_4a_vs_table_9": {
+    "n_kgs": 41,
+    "expected_from_table_9": 0.407,
+    "read_from_fig_4a": 0.396,
+    "gap": 0.011,
+    "gap_as_share_of_scaling_gain": 0.45
+  },
+  "paper_vs_released_code": {
+    "training_walks": {
+      "appendix_e_says_n_16": true,
+      "released_pretraining_config_n": 128
+    },
+    "hetionet_finetuning_ensemble": {
+      "table_18_says_p_1_n_1024": true,
+      "released_config_p": 2,
+      "released_config_n": 1024
+    },
+    "relation_ranking": {
+      "paper_says_filtered": true,
+      "released_code_is_unfiltered": true
+    }
+  },
+  "ultra_finetuning_noise": {
+    "n_kgs": 54,
+    "mrr_median_std": 0.003,
+    "mrr_p90_std": 0.01,
+    "hits10_median_std": 0.004,
+    "hits10_p90_std": 0.012
+  }
+}
