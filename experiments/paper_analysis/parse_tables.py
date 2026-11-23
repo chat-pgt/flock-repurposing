@@ -6,6 +6,7 @@ Requires `pdftotext` (poppler-utils).
 Each row holds MRR and a Hits metric for ULTRA (U, Uh), TRIX (T, Th) and FLOCK (F, Fh).
 Hits is Hits@10 in Tables 9-10 (entity) and Hits@1 in Tables 11-12 (relation).
 """
+
 import argparse
 import json
 import re
