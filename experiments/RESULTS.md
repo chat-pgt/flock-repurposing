@@ -24,7 +24,16 @@ runs.
 
 ### E1. FLOCK vs ULTRA vs popularity
 
-*Pending.*
+| Result | Evidence | Slide |
+|---|---|---|
+| Popularity baseline, drug → disease (755 *treats* edges, 136 candidate diseases): MRR 0.208, 95% CI [0.083, 0.362]; Hits@10 47.0% [27.9%, 62.5%]. Random: MRR 0.041, Hits@10 7.6% | `results/e1_popularity.json` | 1 |
+| Popularity baseline, disease → drug (1,538 candidate compounds): MRR 0.090 [0.039, 0.154]; Hits@10 20.8% [10.4%, 32.6%]. Random: MRR 0.005, Hits@10 0.7% | same | 1 |
+| Drug → disease MRR is 0.153 [0.075, 0.242] when the drug keeps another indication in training (457 edges) and 0.293 [0.089, 0.529] when it does not (298 edges) | same | |
+| Disease → drug never reaches the top 10 for the 298 edges whose drug has no other training indication | same | |
+| Also filtering palliated diseases barely changes drug → disease: MRR 0.209, Hits@10 47.7% | same | |
+| The score is concentrated: hypertension supplies 43% of the total reciprocal rank and the top five diseases 77% | `results/e1_popularity_edges.tsv` | |
+
+FLOCK and ULTRA have not been run on these folds yet.
 
 ### E2. Near-duplicate leakage
 
