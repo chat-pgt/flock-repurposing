@@ -41,7 +41,7 @@ Compare it with the E1 notebook, which uses the same folds and seeds on the full
 
 {HOW_TO_RUN}"""
 
-SETUP = """import base64, io, json, os, shutil, subprocess, tarfile, time
+SETUP = """import base64, importlib.util, io, json, os, shutil, subprocess, tarfile, time
 from pathlib import Path
 
 TIME_BUDGET_HOURS = 8
@@ -49,7 +49,7 @@ NOTEBOOK = "__NAME__"
 EXPERIMENT_COMMIT = "__COMMIT__"
 UPSTREAM_COMMIT = "__UPSTREAM__"
 ULTRA_COMMIT = "__ULTRA__"
-ON_COLAB = Path("/content").exists() and not Path("/kaggle").exists()
+ON_COLAB = importlib.util.find_spec("google.colab") is not None and "KAGGLE_KERNEL_RUN_TYPE" not in os.environ
 WORK = Path(os.environ.get("GPU_WORK", "/tmp/gpu_run"))
 OUTPUT = Path(os.environ.get("GPU_OUTPUT", f"/content/{NOTEBOOK}_output" if ON_COLAB else "/kaggle/working"))
 REPO = WORK / "flock"
