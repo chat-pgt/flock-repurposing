@@ -1,0 +1,453 @@
+{
+  "metadata": {
+    "commit": "95e87eb4ddf986556b50968a89cae6ea371ed7fa",
+    "code_modified_since_commit": false,
+    "python": "3.13.9",
+    "numpy": "2.5.5",
+    "data_sha256": {}
+  },
+  "target_pairs": {
+    "Compound up vs down Gene": [
+      "CuG",
+      "CdG"
+    ],
+    "Disease up vs down Gene": [
+      "DuG",
+      "DdG"
+    ],
+    "Anatomy up vs down Gene": [
+      "AuG",
+      "AdG"
+    ],
+    "treats vs palliates": [
+      "CtD",
+      "CpD"
+    ]
+  },
+  "models": {
+    "ultra": {
+      "n_control_pairs": 263,
+      "raw": {
+        "targets": {
+          "Compound up vs down Gene": {
+            "mean": 1.0,
+            "std": 0.0
+          },
+          "Disease up vs down Gene": {
+            "mean": 1.0000001192092896,
+            "std": 0.0
+          },
+          "Anatomy up vs down Gene": {
+            "mean": 1.0,
+            "std": 0.0
+          },
+          "treats vs palliates": {
+            "mean": 0.6901321411132812,
+            "std": 0.0
+          }
+        },
+        "controls": {
+          "median": 0.5191798210144043,
+          "p05": 0.3492586016654968,
+          "p95": 0.8797923922538757
+        }
+      },
+      "centred": {
+        "targets": {
+          "Compound up vs down Gene": {
+            "mean": 1.0,
+            "std": 0.0
+          },
+          "Disease up vs down Gene": {
+            "mean": 0.9999999403953552,
+            "std": 0.0
+          },
+          "Anatomy up vs down Gene": {
+            "mean": 1.0000001192092896,
+            "std": 0.0
+          },
+          "treats vs palliates": {
+            "mean": 0.2723812758922577,
+            "std": 0.0
+          }
+        },
+        "controls": {
+          "median": -0.15670262277126312,
+          "p05": -0.6134465336799622,
+          "p95": 0.590248167514801
+        }
+      },
+      "merge_check": {
+        "Compound up vs down Gene": {
+          "n_queries_outside_pair": 22,
+          "max_relative_distance": 1.2564289875172108e-07,
+          "relative_distance_when_first_is_the_query": 0.9543848037719727
+        },
+        "Disease up vs down Gene": {
+          "n_queries_outside_pair": 22,
+          "max_relative_distance": 1.3277642096909403e-07,
+          "relative_distance_when_first_is_the_query": 0.9548243880271912
+        },
+        "Anatomy up vs down Gene": {
+          "n_queries_outside_pair": 22,
+          "max_relative_distance": 1.0820861717775188e-07,
+          "relative_distance_when_first_is_the_query": 0.9322981238365173
+        },
+        "treats vs palliates": {
+          "n_queries_outside_pair": 22,
+          "max_relative_distance": 9.328668681973795e-08,
+          "relative_distance_when_first_is_the_query": 0.9615908861160278
+        }
+      },
+      "pca": {
+        "explained_variance": [
+          0.39255550503730774,
+          0.162628173828125
+        ],
+        "coordinates": {
+          "AdG": [
+            -3.575061321258545,
+            -3.1339142322540283
+          ],
+          "AeG": [
+            -3.575061321258545,
+            -3.1339142322540283
+          ],
+          "AuG": [
+            -3.5750608444213867,
+            -3.1339142322540283
+          ],
+          "CbG": [
+            3.4285905361175537,
+            -2.6040358543395996
+          ],
+          "CcSE": [
+            5.76999044418335,
+            3.1166388988494873
+          ],
+          "CdG": [
+            3.4285905361175537,
+            -2.6040358543395996
+          ],
+          "CpD": [
+            5.494485378265381,
+            0.16587881743907928
+          ],
+          "CrC": [
+            4.922591686248779,
+            -0.8560897707939148
+          ],
+          "CtD": [
+            6.4041547775268555,
+            8.137430191040039
+          ],
+          "CuG": [
+            3.4285905361175537,
+            -2.6040358543395996
+          ],
+          "DaG": [
+            3.081510305404663,
+            -2.5808887481689453
+          ],
+          "DdG": [
+            3.081510305404663,
+            -2.580888509750366
+          ],
+          "DlA": [
+            3.7725162506103516,
+            1.302314043045044
+          ],
+          "DpS": [
+            4.049999237060547,
+            4.772586345672607
+          ],
+          "DrD": [
+            4.114901542663574,
+            0.37552425265312195
+          ],
+          "DuG": [
+            3.081510305404663,
+            -2.5808887481689453
+          ],
+          "GcG": [
+            -5.303009510040283,
+            -1.3351984024047852
+          ],
+          "GiG": [
+            -5.303009510040283,
+            -1.3351985216140747
+          ],
+          "GpBP": [
+            -6.903467178344727,
+            3.4913289546966553
+          ],
+          "GpCC": [
+            -6.903467655181885,
+            3.4913289546966553
+          ],
+          "GpMF": [
+            -6.903467178344727,
+            3.491328716278076
+          ],
+          "GpPW": [
+            -6.903467178344727,
+            3.4913289546966553
+          ],
+          "Gr>G": [
+            -5.303009510040283,
+            -1.3351985216140747
+          ],
+          "PCiC": [
+            0.189137265086174,
+            -2.0174880027770996
+          ]
+        }
+      }
+    },
+    "flock": {
+      "n_control_pairs": 263,
+      "raw": {
+        "targets": {
+          "Compound up vs down Gene": {
+            "mean": 0.9946038126945496,
+            "std": 0.006377328187227249
+          },
+          "Disease up vs down Gene": {
+            "mean": 0.9863147735595703,
+            "std": 0.011995949782431126
+          },
+          "Anatomy up vs down Gene": {
+            "mean": 0.99928879737854,
+            "std": 0.0007269568741321564
+          },
+          "treats vs palliates": {
+            "mean": 0.9610903263092041,
+            "std": 0.024031970649957657
+          }
+        },
+        "controls": {
+          "median": 0.8325946927070618,
+          "p05": 0.6664415001869202,
+          "p95": 0.990797221660614
+        }
+      },
+      "centred": {
+        "targets": {
+          "Compound up vs down Gene": {
+            "mean": 0.89510178565979,
+            "std": 0.11231778562068939
+          },
+          "Disease up vs down Gene": {
+            "mean": 0.9300298690795898,
+            "std": 0.057142894715070724
+          },
+          "Anatomy up vs down Gene": {
+            "mean": 0.9887343049049377,
+            "std": 0.010848937556147575
+          },
+          "treats vs palliates": {
+            "mean": 0.8329561352729797,
+            "std": 0.09708019345998764
+          }
+        },
+        "controls": {
+          "median": 0.018246252089738846,
+          "p05": -0.7516189813613892,
+          "p95": 0.8675438761711121
+        }
+      },
+      "n_seeds": 3,
+      "visited_share": 1.0,
+      "averaged_state": {
+        "n_control_pairs": 263,
+        "raw": {
+          "targets": {
+            "Compound up vs down Gene": {
+              "mean": 0.9999034404754639,
+              "std": 0.0
+            },
+            "Disease up vs down Gene": {
+              "mean": 0.9998415112495422,
+              "std": 0.0
+            },
+            "Anatomy up vs down Gene": {
+              "mean": 0.9999603033065796,
+              "std": 0.0
+            },
+            "treats vs palliates": {
+              "mean": 0.9789889454841614,
+              "std": 0.0
+            }
+          },
+          "controls": {
+            "median": 0.8510552048683167,
+            "p05": 0.7047123312950134,
+            "p95": 0.9955825209617615
+          }
+        },
+        "centred": {
+          "targets": {
+            "Compound up vs down Gene": {
+              "mean": 0.9958370923995972,
+              "std": 0.0
+            },
+            "Disease up vs down Gene": {
+              "mean": 0.9989786148071289,
+              "std": 0.0
+            },
+            "Anatomy up vs down Gene": {
+              "mean": 0.9994398951530457,
+              "std": 0.0
+            },
+            "treats vs palliates": {
+              "mean": 0.9010000228881836,
+              "std": 0.0
+            }
+          },
+          "controls": {
+            "median": 0.0018574903951957822,
+            "p05": -0.8110270500183105,
+            "p95": 0.949809730052948
+          }
+        }
+      },
+      "noise_check": {
+        "pairs": {
+          "Compound up vs down Gene": {
+            "same_relation_across_passes": 0.9129618406295776,
+            "different_relation_across_passes": 0.8781453371047974,
+            "leave_one_drug_out_accuracy": 0.49583333333333335,
+            "query_relation_in_pair": false
+          },
+          "Disease up vs down Gene": {
+            "same_relation_across_passes": 0.9185436367988586,
+            "different_relation_across_passes": 0.9168859124183655,
+            "leave_one_drug_out_accuracy": 0.4791666666666667,
+            "query_relation_in_pair": false
+          },
+          "Anatomy up vs down Gene": {
+            "same_relation_across_passes": 0.9794742465019226,
+            "different_relation_across_passes": 0.9778798818588257,
+            "leave_one_drug_out_accuracy": 0.5625,
+            "query_relation_in_pair": false
+          },
+          "treats vs palliates": {
+            "same_relation_across_passes": 0.9527180790901184,
+            "different_relation_across_passes": 0.8326797485351562,
+            "leave_one_drug_out_accuracy": 0.9916666666666667,
+            "query_relation_in_pair": true
+          }
+        },
+        "control_accuracy": {
+          "n_pairs": 40,
+          "median": 1.0,
+          "min": 0.8708333333333333
+        }
+      },
+      "pca": {
+        "explained_variance": [
+          0.4810146391391754,
+          0.29873955249786377
+        ],
+        "coordinates": {
+          "AdG": [
+            -11.365643501281738,
+            -1.8011465072631836
+          ],
+          "AeG": [
+            -12.117219924926758,
+            -2.147515296936035
+          ],
+          "AuG": [
+            -11.524980545043945,
+            -1.7041397094726562
+          ],
+          "CbG": [
+            -5.722395896911621,
+            -4.253727436065674
+          ],
+          "CcSE": [
+            -8.076933860778809,
+            -12.63552474975586
+          ],
+          "CdG": [
+            -4.931507110595703,
+            -4.68754243850708
+          ],
+          "CpD": [
+            20.173933029174805,
+            25.35063934326172
+          ],
+          "CrC": [
+            -6.258291244506836,
+            0.3200284242630005
+          ],
+          "CtD": [
+            28.416444778442383,
+            39.26004409790039
+          ],
+          "CuG": [
+            -5.103517055511475,
+            -4.184108257293701
+          ],
+          "DaG": [
+            22.54932403564453,
+            -6.231349468231201
+          ],
+          "DdG": [
+            18.957584381103516,
+            -12.932565689086914
+          ],
+          "DlA": [
+            19.359046936035156,
+            -11.869552612304688
+          ],
+          "DpS": [
+            19.255136489868164,
+            -11.17447566986084
+          ],
+          "DrD": [
+            20.523460388183594,
+            -15.691314697265625
+          ],
+          "DuG": [
+            19.191030502319336,
+            -12.072348594665527
+          ],
+          "GcG": [
+            -14.840415954589844,
+            4.859771728515625
+          ],
+          "GiG": [
+            -13.029335021972656,
+            4.697729587554932
+          ],
+          "GpBP": [
+            -14.276789665222168,
+            3.3047494888305664
+          ],
+          "GpCC": [
+            -13.29007625579834,
+            6.672548294067383
+          ],
+          "GpMF": [
+            -12.934730529785156,
+            6.3138909339904785
+          ],
+          "GpPW": [
+            -12.769224166870117,
+            5.376807689666748
+          ],
+          "Gr>G": [
+            -13.287322044372559,
+            2.655333995819092
+          ],
+          "PCiC": [
+            -8.897582054138184,
+            2.5738320350646973
+          ]
+        }
+      }
+    }
+  }
+}
