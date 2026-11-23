@@ -28,7 +28,13 @@ runs.
 
 ### E2. Near-duplicate leakage
 
-*Pending.*
+| Result | Evidence | Slide |
+|---|---|---|
+| For 49.0% of held-out *treats* edges (95% CI [38.3%, 58.6%]), a compound the drug *resembles* treats the same disease in that fold's training graph | `results/e2_leakage.json` | 1 |
+| The same rate over diseases the drug is not known to treat is 1.5% uniformly and 4.7% weighted by disease popularity. The excess over the weighted control is 44.3 points [34.3, 53.0], about 10 times the control rate | same | 1 |
+| The rate is similar whether the drug keeps another indication in training (47.7%, 457 edges) or not (51.0%, 298 edges) | same | |
+
+This shows that the shortcut exists in the data. It does not show that the models use it, which the GPU ablation tests.
 
 ### E3. Walk coverage
 
