@@ -22,9 +22,10 @@ BUNDLED_FILES = [
 
 INSTRUCTIONS = """# E0: reproduce FLOCK zero-shot results
 
-1. In the notebook settings, select the **GPU T4** accelerator and turn **Internet on**.
-2. Choose **Save Version**, then **Save & Run All**.
-3. Download the `e0_*` files from the Output tab.
+- **Kaggle:** select the **GPU T4** accelerator, turn **Internet on**, choose **Save Version**, then
+  **Save & Run All**. Download the `e0_*` files from the Output tab.
+- **Colab:** choose **Runtime > Change runtime type > T4 GPU**, then **Runtime > Run all**. Keep the tab
+  open. The last cell downloads `e0_results.zip`.
 
 The notebook checks the walker, runs three small inductive graphs for comparison with Table 9, and
 times 20 Hetionet triples at the paper's zero-shot setting (n = 512, P = 2)."""
@@ -35,7 +36,8 @@ from pathlib import Path
 EXPERIMENT_COMMIT = "__COMMIT__"
 UPSTREAM_COMMIT = "__UPSTREAM__"
 WORK = Path(os.environ.get("E0_WORK", "/tmp/e0"))
-OUTPUT = Path(os.environ.get("E0_OUTPUT", "/kaggle/working"))
+ON_COLAB = Path("/content").exists() and not Path("/kaggle").exists()
+OUTPUT = Path(os.environ.get("E0_OUTPUT", "/content/e0_output" if ON_COLAB else "/kaggle/working"))
 REPO = WORK / "flock"
 PYTHON = Path(os.environ.get("E0_PYTHON", WORK / "env/bin/python"))
 SCRIPTS = REPO / "experiments/e0_reproduction"
@@ -121,6 +123,14 @@ SUMMARY = """for name in ("e0_zero_shot.json", "e0_hetionet_timing.json"):
         )"""
 
 
+COLAB_DOWNLOAD = """if ON_COLAB:
+    import shutil
+
+    from google.colab import files
+
+    files.download(shutil.make_archive("/content/e0_results", "zip", OUTPUT))"""
+
+
 def git(*arguments, text=True):
     return subprocess.run(["git", *arguments], cwd=REPO, capture_output=True, text=text, check=True).stdout
 
@@ -148,7 +158,7 @@ def main():
     archive = git("archive", "--format=tar.gz", "HEAD", "--", *BUNDLED_FILES, text=False)
     get_code = GET_CODE.replace("__BUNDLE__", base64.b64encode(archive).decode())
     setup = SETUP.replace("__COMMIT__", git("rev-parse", "HEAD").strip()).replace("__UPSTREAM__", upstream)
-    code_cells = (setup, GPU_CHECK, get_code, INSTALL, WALKER, REPRODUCE, HETIONET, SUMMARY)
+    code_cells = (setup, GPU_CHECK, get_code, INSTALL, WALKER, REPRODUCE, HETIONET, SUMMARY, COLAB_DOWNLOAD)
     notebook = {
         "cells": [
             cell(0, INSTRUCTIONS, "markdown"),
