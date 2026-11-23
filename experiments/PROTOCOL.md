@@ -53,7 +53,7 @@ model. Changing D1–D4, D8 or D9 means rerunning everything that depends on the
 | D5 | **Filtering.** Remove other known *treats* pairs from the ranking. Diseases the drug *palliates* stay as competitors. A version that also removes them is reported as a sensitivity check. | The two relations never overlap in Hetionet, so palliated diseases are curated examples of "related, but not disease-modifying". Removing them would hide that error. | agreed |
 | D6 | **Metrics.** MRR and Hits@10 with the exact random baseline. Ties are broken uniformly at random, in expectation, for every model. | The released ranking counts every tie against the target. That would penalise a popularity baseline, where at least 59 diseases share a count of zero. | agreed |
 | D7 | **Uncertainty.** At least three walk seeds for stochastic models, averaged per edge. 95% CIs from a two-way bootstrap that resamples drugs and diseases independently (Owen, 2007). Models are compared through paired per-edge differences. | Edges are dependent along both axes: 10 of the 77 treated diseases hold 43% of edges, and 66% of edges come from drugs with several indications. | agreed |
-| D8 | **Models.** Released checkpoints pretrained on FB15k-237, WN18RR and CoDEx-Medium, used zero-shot. ULTRA's public checkpoint on the same three graphs, at a pinned commit. | Same pretraining data for both models. Training-seed variance cannot be measured from a single checkpoint, and results must state this. | agreed |
+| D8 | **Models.** Released checkpoints pretrained on FB15k-237, WN18RR and CoDEx-Medium, used zero-shot. ULTRA's public checkpoint on the same three graphs, at a pinned commit. | Same pretraining data for both models. Training-seed variance cannot be measured from a single checkpoint, and results must state this. The public ULTRA checkpoint comes from a PyG reimplementation, so its per-graph scores differ from the ULTRA numbers in the papers. | agreed |
 | D9 | **FLOCK settings.** The paper's zero-shot Hetionet setting (n = 512, P = 2), on which Table 18 and the released config agree. A change forced by memory applies to all folds and seeds, and is reported. | Keeps results comparable with the paper and across folds. Fine-tuning is less clear: Table 18 states P = 1 and n = 1024, while the released config runs P = 2 at n = 1024. E5 therefore evaluates at the zero-shot setting. | agreed |
 
 ---
@@ -188,6 +188,8 @@ Priorities are *core*, *extension* and *optional*.
   messages are one-line and conventional. The same file checks run on every pull request.
 - **GPU environment.** The base image fixes PyTorch and CUDA, so E0 records the exact packages with
   `pip freeze` in `requirements-gpu.txt`.
+- **GPU runs.** `gpu/build_notebooks.py` builds self-contained notebooks in `notebooks/` from a commit.
+  They use pinned FLOCK and ULTRA commits and save each fold as it finishes.
 - **Seeds.** The released code does not seed NumPy, which drives walk sampling, so `--seed` alone does
   not make walks repeatable. Experiment runners seed it explicitly, and E0 verifies the result.
 - **Artifacts.** Each result JSON records the commit, seed, config, environment and checkpoint hash.
