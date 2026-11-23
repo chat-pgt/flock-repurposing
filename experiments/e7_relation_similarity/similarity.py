@@ -84,6 +84,18 @@ def leave_one_query_out_accuracy(states, first, second):
     return correct / total
 
 
+def sample_balanced(relations, pair, per_relation, seed=0):
+    """Pick the same number of rows for each relation in a pair, reproducibly and in sorted order."""
+    rng = np.random.default_rng(seed)
+    chosen = []
+    for relation in pair:
+        rows = np.flatnonzero(np.asarray(relations) == relation)
+        if len(rows) < per_relation:
+            raise ValueError(f"relation {relation} has only {len(rows)} rows")
+        chosen.append(rng.choice(rows, size=per_relation, replace=False))
+    return np.sort(np.concatenate(chosen))
+
+
 def summarise(states, names, head_kinds, tail_kinds):
     """Summarise raw and centred cosines for target pairs against control pairs."""
     controls = control_pairs(names, head_kinds, tail_kinds)

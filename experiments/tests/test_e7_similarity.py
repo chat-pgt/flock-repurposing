@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
 
+from e7_relation_similarity.analyze_relation_pairs import pair_baselines
 from e7_relation_similarity.similarity import (
     across_pass_cosines,
     centre,
@@ -10,8 +11,29 @@ from e7_relation_similarity.similarity import (
     pair_cosines,
     pca_2d,
     relative_distance,
+    sample_balanced,
     summarise,
 )
+
+
+def test_balanced_sample_is_reproducible_and_equal_per_relation():
+    relations = np.array([0, 1, 2, 1, 0, 1, 0, 2, 1])
+
+    rows = sample_balanced(relations, [0, 1], 2, seed=3)
+
+    assert np.array_equal(rows, sample_balanced(relations, [0, 1], 2, seed=3))
+    assert (relations[rows] == 0).sum() == (relations[rows] == 1).sum() == 2
+    with pytest.raises(ValueError, match="only 2 rows"):
+        sample_balanced(relations, [2], 3)
+
+
+def test_pair_baselines_use_frequency_and_endpoint_signature():
+    train = [("C::a", "up", "G::x"), ("C::b", "down", "G::y"), ("C::c", "down", "G::z")]
+
+    result = pair_baselines(train, ["C::a", "C::b"], ["G::x", "G::x"], [1, 0], ["down", "up"], [0, 1])
+
+    assert result["frequency"].tolist() == [0, 1]
+    assert result["signature"].tolist() == [1, 1]
 
 
 def noisy_states(gap, seed=0):
