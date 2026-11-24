@@ -183,7 +183,7 @@ Priorities are *core*, *extension* and *optional*.
 - **Read-out.** ULTRA cosine near 1, well above the controls, demonstrates the paper's motivation on
   pharmacological data. Values close to the controls mean the problem does not bind on Hetionet.
 - **Compute.** GPU, about 60 FLOCK queries, plus about 2 hours for the follow-up.
-- **Status.** First run done and reviewed. Follow-up prepared, not run.
+- **Status.** First run done and reviewed. Follow-up run.
 
 ---
 
