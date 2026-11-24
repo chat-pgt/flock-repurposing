@@ -42,6 +42,6 @@ FLOCK performs on drug repurposing with Hetionet. The study lives in `experiment
 - Walk sampling draws its seed from NumPy, which the released code never seeds. Experiment runners must
   seed it.
 - `compute_ranking` counts ties against the target. Experiments use `common/evaluation.py` instead.
-- The released code appears to give r and r⁻¹ different anonymous IDs and to label each hop at random as
-  (r, forward) or (r⁻¹, backward), unlike Appendix A.2. This comes from reading the code and is
-  **unconfirmed**. E0 checks it.
+- The released code gives r and r⁻¹ different anonymous IDs and labels each hop at random as
+  (r, forward) or (r⁻¹, backward), unlike Appendix A.2. `experiments/e0_reproduction/check_walker.py`
+  confirms this.
