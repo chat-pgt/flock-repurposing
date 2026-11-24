@@ -1,0 +1,12 @@
+relation_flock_seed0: triples 56, 24-way MRR 0.982, treats vs palliates Hits@1 0.964
+relation_flock_seed1: triples 56, 24-way MRR 0.973, treats vs palliates Hits@1 0.946
+relation_flock_seed2: triples 56, 24-way MRR 0.955, treats vs palliates Hits@1 0.911
+relation_ultra_seed0: triples 56, 24-way MRR 0.756, treats vs palliates Hits@1 0.536
+entity_flock_full_head_seed0: folds 5/5, edges 755, MRR 0.178, Hits@10 0.343, 7.88 s/query, peak GPU 3.3 GB
+entity_flock_full_head_seed1: folds 5/5, edges 755, MRR 0.175, Hits@10 0.332, 7.79 s/query, peak GPU 3.3 GB
+entity_flock_full_head_seed2: folds 5/5, edges 755, MRR 0.177, Hits@10 0.339, 7.82 s/query, peak GPU 3.3 GB
+entity_flock_full_tail_seed0: folds 5/5, edges 755, MRR 0.452, Hits@10 0.738, 7.71 s/query, peak GPU 3.3 GB
+entity_flock_full_tail_seed1: folds 5/5, edges 755, MRR 0.453, Hits@10 0.751, 7.76 s/query, peak GPU 3.3 GB
+entity_flock_full_tail_seed2: folds 5/5, edges 755, MRR 0.455, Hits@10 0.756, 7.75 s/query, peak GPU 3.3 GB
+entity_ultra_full_head_seed0: folds 5/5, edges 755, MRR 0.219, Hits@10 0.400, 0.34 s/query, peak GPU 0.6 GB
+entity_ultra_full_tail_seed0: folds 5/5, edges 755, MRR 0.368, Hits@10 0.650, 0.34 s/query, peak GPU 0.6 GB

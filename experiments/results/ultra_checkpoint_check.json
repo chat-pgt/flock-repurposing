@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "commit": "aafdec5bd6849508c86c4750a5d73007f5d0fe16",
+    "python": "3.12.3",
+    "torch": "2.8.0+cu126",
+    "torch_geometric": "2.4.0",
+    "numpy": "1.26.4",
+    "device": "Tesla T4",
+    "checkpoint_sha256": "fdedc01b0045fc089d2ad5da08569466b7b221691fe978a18e91082bbb133c18",
+    "ultra_commit": "427966ad8ed60420eef034063d44f3153addff90"
+  },
+  "graphs": [
+    {
+      "graph": "FB15k237Inductive:v1",
+      "mrr": 0.48626020550727844,
+      "hits10": 0.6569343209266663
+    },
+    {
+      "graph": "FB15k237Inductive:v2",
+      "mrr": 0.5004682540893555,
+      "hits10": 0.6942977905273438
+    },
+    {
+      "graph": "FB15k237Inductive:v3",
+      "mrr": 0.48213139176368713,
+      "hits10": 0.6444251537322998
+    },
+    {
+      "graph": "FB15k237Inductive:v4",
+      "mrr": 0.47686973214149475,
+      "hits10": 0.6707746386528015
+    },
+    {
+      "graph": "WN18RRInductive:v1",
+      "mrr": 0.5929059982299805,
+      "hits10": 0.7788203954696655
+    },
+    {
+      "graph": "WN18RRInductive:v2",
+      "mrr": 0.6204667687416077,
+      "hits10": 0.7517606019973755
+    },
+    {
+      "graph": "WN18RRInductive:v3",
+      "mrr": 0.37122729420661926,
+      "hits10": 0.49387577176094055
+    },
+    {
+      "graph": "WN18RRInductive:v4",
+      "mrr": 0.48391610383987427,
+      "hits10": 0.687035083770752
+    },
+    {
+      "graph": "NELLInductive:v1",
+      "mrr": 0.7267899513244629,
+      "hits10": 0.8656716346740723
+    },
+    {
+      "graph": "NELLInductive:v2",
+      "mrr": 0.5246647000312805,
+      "hits10": 0.7187166213989258
+    },
+    {
+      "graph": "NELLInductive:v3",
+      "mrr": 0.5112240314483643,
+      "hits10": 0.6867284178733826
+    },
+    {
+      "graph": "NELLInductive:v4",
+      "mrr": 0.4903208911418915,
+      "hits10": 0.7011057138442993
+    },
+    {
+      "graph": "ILPC2022:small",
+      "mrr": 0.2958507835865021,
+      "hits10": 0.4412474036216736
+    },
+    {
+      "graph": "ILPC2022:large",
+      "mrr": 0.29706886410713196,
+      "hits10": 0.422820121049881
+    },
+    {
+      "graph": "HM:1k",
+      "mrr": 0.07906088978052139,
+      "hits10": 0.15021009743213654
+    },
+    {
+      "graph": "HM:3k",
+      "mrr": 0.06341121345758438,
+      "hits10": 0.12045960128307343
+    },
+    {
+      "graph": "HM:5k",
+      "mrr": 0.055193834006786346,
+      "hits10": 0.10145951062440872
+    },
+    {
+      "graph": "HM:indigo",
+      "mrr": 0.43607643246650696,
+      "hits10": 0.6489532589912415
+    }
+  ],
+  "summary": {
+    "mean_mrr": 0.41632818554838497,
+    "mean_hits10": 0.5686275632017188,
+    "official_mrr": 0.42,
+    "official_hits10": 0.562,
+    "matches_official": true
+  }
+}
