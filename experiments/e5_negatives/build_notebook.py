@@ -7,14 +7,14 @@ import base64
 
 from gpu.build_notebooks import BUNDLED_PATHS, GET_CODE, HOW_TO_RUN, OUTPUT_DIR, build, git
 
-ABOUT = """Each fold starts from the released checkpoint, makes one pass over that fold's training *treats* facts
-with either uniform or disease-only negatives, and is scored on the held-out edges exactly as in E1."""
+ABOUT = """Each fold starts from the released checkpoint, trains on that fold's training *treats* facts with
+either uniform or disease-only negatives, and is scored on the held-out edges exactly as in E1."""
 
 NOTEBOOKS = {
     "gpu_e5_ultra": (
         f"""# E5: ULTRA fine-tuned with uniform or disease-only negatives
 
-{ABOUT} ULTRA runs on all five folds.
+{ABOUT} ULTRA runs on all five folds for 3 epochs, scored after each, in about 3 hours.
 
 {HOW_TO_RUN}""",
         ['stage("e5_negatives.finetune", f"--model ultra --ultra-repo {ULTRA} --output-dir {OUTPUT}/runs")'],
@@ -22,7 +22,7 @@ NOTEBOOKS = {
     "gpu_e5_flock": (
         f"""# E5: FLOCK pilot, fine-tuned with uniform or disease-only negatives
 
-{ABOUT} FLOCK runs on fold 0 only, because each run takes about an hour.
+{ABOUT} FLOCK runs on fold 0 only, for one epoch, because each run takes about an hour.
 
 {HOW_TO_RUN}""",
         ['stage("e5_negatives.finetune", f"--model flock --folds 0 --output-dir {OUTPUT}/runs")'],
