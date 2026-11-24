@@ -58,7 +58,15 @@ because their candidate sets differ.
 
 ### E3. Walk coverage
 
-*Pending.*
+| Result | Evidence | Slide |
+|---|---|---|
+| On 200 drug → disease queries (259 edges), fewer walks lower MRR from 0.457 (E1's n = 512, ℓ = 128, seed 0) to 0.387 at n = 256 (−0.071 [−0.139, −0.012]), 0.272 at n = 128 (−0.185 [−0.264, −0.109]) and 0.212 at n = 64 (−0.245 [−0.336, −0.153]) | `results/e3_coverage.json` | |
+| At the same budget n·ℓ, shorter walks do not hurt. n = 1024, ℓ = 64 gives 0.494 (+0.036 [−0.019, +0.093]), and n = 2048, ℓ = 32 gives 0.530 (+0.073 [+0.009, +0.143]; Hits@10 +8.5 points [1.7, 17.2]) | same | |
+| Removing all 526,407 Anatomy–*expresses*–Gene edges (23% of the graph) leaves MRR unchanged at 0.485 (+0.028 [−0.026, +0.089]) and halves the time per query, from 7.7 s to 3.9 s | same, `results/e3_run_log.txt` | |
+| Noise floor: on the same edges, E1's seeds 1 and 2 differ from seed 0 by −0.004 and −0.006 MRR | `results/e3_coverage.json` | |
+
+Shorter walks reuse the checkpoint trained at ℓ = 128, so they measure the released model's robustness, not
+what a model trained at each length would do. Each setting has one walk seed.
 
 ### E4. Walk explanations
 
