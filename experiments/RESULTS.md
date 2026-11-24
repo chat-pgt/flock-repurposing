@@ -33,8 +33,12 @@ runs.
 | For 49.0% of held-out *treats* edges (95% CI [38.3%, 58.6%]), a compound the drug *resembles* treats the same disease in that fold's training graph | `results/e2_leakage.json` | 1 |
 | The same rate over diseases the drug is not known to treat is 1.5% uniformly and 4.7% weighted by disease popularity. The excess over the weighted control is 44.3 points [34.3, 53.0], about 10 times the control rate | same | 1 |
 | The rate is similar whether the drug keeps another indication in training (47.7%, 457 edges) or not (51.0%, 298 edges) | same | |
+| Removing all 6,486 *resembles* edges lowers ULTRA's drug → disease MRR from 0.368 to 0.300 (Hits@10 65.0% → 57.6%). The drop is 0.120 [0.056, 0.202] on flagged edges and 0.017 [−0.005, +0.039] on unflagged ones, an extra 0.103 [0.039, 0.182] on flagged edges | `results/e2_ablation.json` | 1 |
+| FLOCK (walk seeds 0 and 1) goes from 0.452 to 0.432 (Hits@10 74.4% → 73.2%). The drop is 0.046 [0.002, 0.095] on flagged edges and −0.004 [−0.034, +0.025] on unflagged ones. The extra drop on flagged edges, +0.050 [−0.005, +0.107], is not distinguishable from zero | same | 1 |
 
-This shows that the shortcut exists in the data. It does not show that the models use it, which the GPU ablation tests.
+The fraction shows that the shortcut exists in the data, and the ablation shows that ULTRA uses it. FLOCK's
+drop is smaller and not clearly concentrated on flagged edges, but the two models were not compared
+directly. FLOCK has two walk seeds here, one fewer than D7 requires.
 
 ### E3. Walk coverage
 
