@@ -164,7 +164,7 @@ Priorities are *core*, *extension* and *optional*.
   frequency. C is the fairer comparison, because it uses only what the models also see. If FLOCK stays
   clearly above it, FLOCK is separating relations beyond those counts.
 - **Compute.** CPU.
-- **Status.** Approved and run.
+- **Status.** Approved and run. FLOCK and ULTRA also run on the 56 Compound–Disease triples.
 
 ### E7. Does ULTRA merge up- and downregulates? (optional)
 
