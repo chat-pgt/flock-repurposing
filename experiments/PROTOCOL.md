@@ -91,7 +91,7 @@ Priorities are *core*, *extension* and *optional*.
 - **Read-out.** If popularity comes close, the task mostly rewards hub diseases (tail) or drugs with many
   indications (head). Raw scores are not compared across directions.
 - **Compute.** CPU for popularity, GPU for the models.
-- **Status.** Popularity baseline approved and run. FLOCK (three walk seeds) and ULTRA run in both directions on a Kaggle T4. Results recorded, awaiting review.
+- **Status.** Popularity baseline approved and run. FLOCK (three walk seeds) and ULTRA run in both directions on a Kaggle T4. Results reviewed.
 
 ### E2. Near-duplicate leakage (core)
 
