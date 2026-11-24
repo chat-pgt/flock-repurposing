@@ -125,12 +125,37 @@ Priorities are *core*, *extension* and *optional*.
 
 - **Origin.** If this approach suits repurposing, its walks should read like candidate mechanisms
   (drug → gene → disease).
-- **Question.** Do high-confidence walks look like plausible mechanisms?
-- **Design.** For one well-known drug–disease pair, extract the highest-confidence walks and map them
-  back to entity names.
-- **Read-out.** Illustrative only, because confidence weights are not faithful attributions.
-- **Compute.** GPU.
-- **Status.** Not started. To be built now that the E1 and E2 results are in.
+- **Question.** Do high-confidence walks look like plausible mechanisms, or like the shortcuts that E1
+  and E2 found?
+- **Design.** FLOCK's entity checkpoint, zero-shot at the D9 setting. Every case is scored on the fold
+  where its edge is held out. Four showcase pairs, chosen before running, with three walk seeds:
+  - valsartan → hypertension, flagged in E2 because sartans it resembles treat hypertension;
+  - acarbose → type 2 diabetes, a first indication that FLOCK ranks first and ULTRA about tenth;
+  - metformin → type 2 diabetes, the best-known pair, which FLOCK ranks lower (reciprocal rank 0.29);
+  - dasatinib → hematologic cancer, the best case for a mechanism: among held-out edges where no
+    compound that resembles the drug or shares its class treats the disease, the one with the most
+    drug -binds-> gene <-associates- disease paths (17). Chosen from the graph, not from model scores.
+
+  A survey adds 40 held-out edges, 8 per fold drawn with a fixed seed, with one walk seed, to give base
+  rates against which the showcase pairs can be read.
+
+  FLOCK builds the disease's state as a sum over refinements of an attention-weighted mean over every walk
+  position that visits it. The runner records those weights without changing upstream code, checks that
+  they rebuild the model's consensus output, and credits each walk with its share. For walks that also
+  visit the drug, it takes the shortest stretch between drug and disease, maps it to names, and classifies
+  stretches of at most 4 hops: ending with another drug's treatment of the disease, passing through a
+  gene, or other. Two deletion tests check whether the credited evidence matters:
+  - the facts on the 5 top stretches are deleted and the case rescored, against deleting as many random
+    facts touching the drug or the disease, with the same seed;
+  - for the showcase pairs, the drug's *resembles*, pharmacologic-class, gene and side-effect facts, and
+    the disease's other treatments, are deleted one family at a time.
+- **Read-out.** Attention weights alone are not faithful attributions, so the weight shares are
+  descriptive. The deletion tests make them causal for these cases: if deleting the top stretches lowers
+  the disease's rank more than random deletion, the weights point at evidence the model uses. Weight and
+  deletion effects on another drug's treatment show the E2 shortcut from the model's side; on gene
+  stretches they read as mechanisms.
+- **Compute.** GPU, about 40 minutes on a Kaggle T4.
+- **Status.** Approved. Run on a Kaggle T4. Results reviewed.
 
 ### E5. Type-constrained negatives in fine-tuning (extension)
 
