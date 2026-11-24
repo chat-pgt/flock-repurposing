@@ -59,8 +59,11 @@ runs.
 | Published zero-shot scores for comparison: FLOCK 0.940 / 0.890, TRIX 0.809 / 0.707, ULTRA 0.634 / 0.524 (MRR / Hits@1) | Table 11 of the paper | 2 |
 | 48,419 test triples (43%) have only one relation compatible with their entity types. On the other 64,091, MRR is 0.798 for B and 0.851 for C. FLOCK's published 0.940 implies at least 0.895 on those triples | same | 2 |
 | Compound–Disease (56 triples), choosing between *treats* and *palliates*: 50% at random, 64.3% for B and 80.4% for C [59.3%, 95.1%]. Over all 24 relations, C's top choice is right for only 60.7% (34 of 56), because without entity types it can rank a more frequent, unrelated relation first. Too few triples to separate the baselines | same, `results/e6_compound_disease.json` | |
+| FLOCK (relation checkpoint, 3 walk seeds) on the same 56 triples: *treats* vs *palliates* Hits@1 94.0% [84.3%, 100%], 13.7 points [1.5, 32.6] above C restricted to the pair. Its 24-way MRR is 0.970 [0.921, 1.000], against 0.657 for C | `results/e6_compound_disease.json` | 2 |
+| ULTRA (public checkpoint) on the same 56 triples: *treats* vs *palliates* Hits@1 53.6% [31.2%, 75.7%], no better than chance. Its 24-way MRR is 0.756 [0.641, 0.869] | same | 2 |
 
-FLOCK's scores here are the published ones. They have not been reproduced in this study yet.
+The overall FLOCK, TRIX and ULTRA scores are the published ones. This study reran FLOCK and ULTRA only on the
+56 Compound–Disease triples, with two-way bootstrap CIs over compounds and diseases.
 
 ### E7. Relation similarity
 
