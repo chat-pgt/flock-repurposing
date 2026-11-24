@@ -195,14 +195,14 @@ def cell(index, source, cell_type="code"):
     }
 
 
-def build(name, intro, stages, get_code, commit, upstream):
+def build(name, intro, stages, get_code, commit, upstream, summary=SUMMARY):
     setup = (
         SETUP.replace("__NAME__", name)
         .replace("__COMMIT__", commit)
         .replace("__UPSTREAM__", upstream)
         .replace("__ULTRA__", ULTRA_COMMIT)
     )
-    sources = (setup, GPU_CHECK, get_code, INSTALL, *stages, SUMMARY, DOWNLOAD)
+    sources = (setup, GPU_CHECK, get_code, INSTALL, *stages, *([summary] if summary else []), DOWNLOAD)
     notebook = {
         "cells": [
             cell(0, intro, "markdown"),
