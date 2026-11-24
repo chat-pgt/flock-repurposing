@@ -105,7 +105,7 @@ Priorities are *core*, *extension* and *optional*.
 - **Read-out.** A fraction well above the popularity-weighted control, or a large drop without
   *resembles*, means performance depends on near-duplicates.
 - **Compute.** CPU for the fraction, GPU for the ablation.
-- **Status.** Fraction approved and run. Ablation run with ULTRA and FLOCK walk seeds 0 and 1. Seed 2 not run.
+- **Status.** Fraction approved and run. Ablation run on a Kaggle T4 with ULTRA and FLOCK walk seeds 0 and 1. Results recorded, awaiting review. FLOCK seed 2 prepared, not run.
 
 ### E3. Walk coverage (optional)
 
