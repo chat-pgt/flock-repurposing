@@ -111,11 +111,12 @@ def hop_relation(recorded_type, n_relations):
 
 
 def describe_stretch(nodes, recorded_types, lookup, relation_names, entity_label):
-    """Render a stretch as text and as a metapath of node kinds and relation verbs.
+    """Render a stretch as text and as a metapath, and list the stored facts behind its hops.
 
-    `recorded_types[i]` is the type of the hop that reaches `nodes[i + 1]` from `nodes[i]`.
+    `recorded_types[i]` is the type of the hop that reaches `nodes[i + 1]` from `nodes[i]`. Facts are
+    (head, relation, tail) as stored; a hop with no recorded type or no matching fact contributes none.
     """
-    text, metapath = [entity_label(nodes[0])], [entity_label(nodes[0], kind_only=True)]
+    text, metapath, facts = [entity_label(nodes[0])], [entity_label(nodes[0], kind_only=True)], []
     for source, target, recorded in zip(nodes[:-1], nodes[1:], recorded_types, strict=True):
         relation = hop_relation(recorded, len(relation_names))
         if relation is None:
@@ -124,6 +125,36 @@ def describe_stretch(nodes, recorded_types, lookup, relation_names, entity_label
             verb = METAEDGES[relation_names[relation]][1]
             orientation = lookup.orient(source, relation, target)
             arrow = {1: f"-{verb}->", -1: f"<-{verb}-", 0: f"?{verb}?"}[orientation]
+            if orientation == 1:
+                facts.append((int(source), int(relation), int(target)))
+            elif orientation == -1:
+                facts.append((int(target), int(relation), int(source)))
         text += [arrow, entity_label(target)]
         metapath += [arrow, entity_label(target, kind_only=True)]
-    return " ".join(text), " ".join(metapath)
+    return " ".join(text), " ".join(metapath), facts
+
+
+def stretch_category(kinds, ends_with_treatment):
+    """Classify a short drug -> disease stretch by the evidence it carries."""
+    if ends_with_treatment:
+        return "another drug's treatment"
+    if "Gene" in kinds[1:-1]:
+        return "gene"
+    return "other"
+
+
+def drop_facts(graph, keep, facts):
+    """Return `keep` with the given (head, relation, tail) facts also removed."""
+    n_entities, n_relations = len(graph.entities), len(graph.relation_names)
+    keys = (graph.heads.astype(np.int64) * n_entities + graph.tails) * n_relations + graph.relations
+    dropped = np.array([(h * n_entities + t) * n_relations + r for h, r, t in facts], dtype=np.int64)
+    return keep & ~np.isin(keys, dropped)
+
+
+def incident_facts(graph, keep, nodes, relations=None):
+    """Return the kept facts touching any of `nodes`, optionally limited to some relations, as tuples."""
+    touching = keep & (np.isin(graph.heads, nodes) | np.isin(graph.tails, nodes))
+    if relations is not None:
+        touching &= np.isin(graph.relations, relations)
+    rows = np.flatnonzero(touching)
+    return [(int(graph.heads[i]), int(graph.relations[i]), int(graph.tails[i])) for i in rows]
