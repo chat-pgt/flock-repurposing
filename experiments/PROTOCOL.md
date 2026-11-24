@@ -118,7 +118,7 @@ Priorities are *core*, *extension* and *optional*.
 - **Read-out.** If performance tracks n·ℓ beyond the noise floor, coverage matters. If it does not move,
   the explanation lies elsewhere. The relation-removal arm shows whether the design of the graph matters.
 - **Compute.** GPU, about 2.5 hours.
-- **Status.** Approved in reduced scope. Prepared and smoke-tested, not run. The E1 reference run it compares against is complete.
+- **Status.** Approved in reduced scope. Run on a Kaggle T4. Results recorded, awaiting review.
 
 ### E4. Walk explanations (extension)
 
