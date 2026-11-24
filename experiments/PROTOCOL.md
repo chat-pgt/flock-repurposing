@@ -166,7 +166,7 @@ Priorities are *core*, *extension* and *optional*.
   fine-tuning seed and one fold for FLOCK, this is a proof of concept for FLOCK and a narrow test for ULTRA.
 - **Compute.** GPU. ULTRA: 10 runs of about 228 steps, roughly 3 hours. FLOCK: 2 runs of about 302 steps,
   roughly 2 hours.
-- **Status.** Built and smoke-tested on CPU. Awaiting approval.
+- **Status.** Approved. Built and smoke-tested on CPU, not run yet.
 
 ### E6. No-learning baseline for relation prediction (core)
 
