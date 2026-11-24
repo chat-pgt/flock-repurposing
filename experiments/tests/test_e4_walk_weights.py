@@ -5,11 +5,15 @@ from e4_explanations.walk_weights import (
     EdgeLookup,
     describe_stretch,
     distance_label,
+    drop_facts,
     hop_relation,
+    incident_facts,
     nearest_stretch,
     occurrence_shares,
     occurrence_weights,
+    stretch_category,
 )
+from gpu.graphs import encode_triples
 
 
 def test_occurrence_weights_softmax_each_head_then_average():
@@ -66,9 +70,60 @@ def test_stretches_render_with_names_and_metapaths():
         return kind if kind_only else f"{name} ({kind})"
 
     # aspirin -> salsalate by the flipped copy of CrC (type 1 + 2), then salsalate -> pain with no type.
-    text, metapath = describe_stretch([0, 2], [3], lookup, ("CtD", "CrC"), label)
+    text, metapath, facts = describe_stretch([0, 2], [3], lookup, ("CtD", "CrC"), label)
     assert text == "aspirin (Compound) <-resembles- salsalate (Compound)"
     assert metapath == "Compound <-resembles- Compound"
+    assert facts == [(2, 1, 0)]
 
-    text, _ = describe_stretch([2, 0, 1], [1, 2], lookup, ("CtD", "CrC"), label)
+    text, _, facts = describe_stretch([2, 0, 1], [1, 2], lookup, ("CtD", "CrC"), label)
     assert text == "salsalate (Compound) -resembles-> aspirin (Compound) -treats-> pain (Disease)"
+    assert facts == [(2, 1, 0), (0, 0, 1)]
+
+
+def test_hops_without_a_recorded_type_or_fact_give_no_fact():
+    lookup = EdgeLookup(heads=[0], relations=[0], tails=[1], n_entities=3, n_relations=2)
+
+    _, _, facts = describe_stretch([0, 2, 1], [9, 1], lookup, ("CtD", "CrC"), lambda node, kind_only=False: "x")
+
+    assert facts == []
+
+
+def test_stretch_categories():
+    assert stretch_category(["Compound", "Compound", "Disease"], ends_with_treatment=True) == "another drug's treatment"
+    assert stretch_category(["Compound", "Gene", "Disease"], ends_with_treatment=False) == "gene"
+    assert stretch_category(["Compound", "Side Effect", "Compound", "Disease"], False) == "other"
+
+
+GRAPH = encode_triples(
+    [
+        ("Compound::a", "CtD", "Disease::x"),
+        ("Compound::b", "CtD", "Disease::x"),
+        ("Compound::a", "CrC", "Compound::b"),
+        ("Compound::c", "CbG", "Gene::g"),
+    ]
+)
+
+
+def test_drop_facts_removes_only_the_named_facts():
+    index = GRAPH.entities.index
+    fact = (index("Compound::a"), GRAPH.relation_names.index("CrC"), index("Compound::b"))
+    keep = np.ones(len(GRAPH.heads), dtype=bool)
+
+    kept = drop_facts(GRAPH, keep, [fact])
+
+    removed = {(GRAPH.heads[i], GRAPH.relations[i], GRAPH.tails[i]) for i in np.flatnonzero(~kept)}
+    assert removed == {fact}
+    assert drop_facts(GRAPH, keep, []).all()
+
+
+def test_incident_facts_respect_the_kept_graph_and_relations():
+    index = GRAPH.entities.index
+    keep = np.ones(len(GRAPH.heads), dtype=bool)
+    treats = GRAPH.relation_names.index("CtD")
+
+    touching = incident_facts(GRAPH, keep, [index("Disease::x")], [treats])
+    assert sorted(touching) == sorted(
+        [(index("Compound::a"), treats, index("Disease::x")), (index("Compound::b"), treats, index("Disease::x"))]
+    )
+    keep[0] = False
+    assert len(incident_facts(GRAPH, keep, [index("Disease::x")], [treats])) == 1
