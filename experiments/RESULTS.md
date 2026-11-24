@@ -26,6 +26,8 @@ runs.
 | The released walk recording differs from Appendix A.2. Each hop is labeled at random as (r, forward) or (r⁻¹, backward), consecutive hops over the same relation share an anonymous ID 50% of the time, and the query-relation flag fires on 50% of hops over that relation. The effect on performance was not measured | `results/e0_walker_check.json`, `results/e0_walker_check_colab.json` | |
 | `--seed` alone does not make walks repeatable, because the released code does not seed NumPy. With NumPy seeded, walks are identical across runs, CPU counts and machines | same | |
 | On a Colab T4 at n = 512, P = 2 and batch size 1, FLOCK takes about 15 s per Hetionet query and 3.4 GB of GPU memory. This is a timing check on 20 triples, so its MRR is not a result | `results/e0_hetionet_timing.json` | |
+| ULTRA's public checkpoint scores a mean MRR of 0.416 here over the 18 graphs in its README, against the official 0.420 (Hits@10 0.569 vs 0.562). Runs in this study are labeled "ULTRA (public checkpoint)" and are not comparable with the ULTRA columns of the papers | `results/ultra_checkpoint_check.json` | |
+| On a Kaggle T4 with 4 CPU cores, a Hetionet entity query takes 7.7–7.9 s and 3.3 GB of GPU memory for FLOCK (n = 512, P = 2), about 23 times the 0.34 s and 0.6 GB of ULTRA | `results/gpu_e1_summary.txt` | |
 
 ### E1. FLOCK vs ULTRA vs popularity
 
