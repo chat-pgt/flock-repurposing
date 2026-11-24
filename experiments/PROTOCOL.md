@@ -128,7 +128,7 @@ Priorities are *core*, *extension* and *optional*.
   back to entity names.
 - **Read-out.** Illustrative only, because confidence weights are not faithful attributions.
 - **Compute.** GPU.
-- **Status.** Not built. Deferred until the E1 and E2 results, which are now in. Decision pending.
+- **Status.** Not started. To be built now that the E1 and E2 results are in.
 
 ### E5. Type-constrained negatives in fine-tuning (extension)
 
@@ -144,7 +144,7 @@ Priorities are *core*, *extension* and *optional*.
 - **Read-out.** A gain supports better negatives. A loss may reflect pushing down true but unrecorded
   indications (positive-unlabeled learning).
 - **Compute.** GPU. The most expensive experiment.
-- **Status.** Not built. Deferred until the E1 and E2 results, which are now in. Decision pending.
+- **Status.** Not started. To be built now that the E1 and E2 results are in.
 
 ### E6. No-learning baseline for relation prediction (core)
 
