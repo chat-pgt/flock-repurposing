@@ -62,7 +62,18 @@ because their candidate sets differ.
 
 ### E4. Walk explanations
 
-*Pending.*
+| Result | Evidence | Slide |
+|---|---|---|
+| Survey of 40 random held-out edges (one walk seed): 65% of the disease's attention weight comes from walks that never visit the drug, and 27% from walks where the drug is more than 4 hops away. Short drug → disease stretches carry 8%: 5.4% end with another drug's treatment of the disease, 1.4% pass through a gene | `results/e4_walk_explanations.json` | |
+| Deleting the facts on the 5 top stretches (8.6 on average) changes the disease's reciprocal rank by −0.154 [−0.303, −0.041]; deleting as many random facts touching the drug or disease changes it by −0.002 [−0.091, +0.093]. Paired difference −0.152 [−0.324, −0.015]: larger on 15 edges, smaller on 7, equal on 18 | same | |
+| Acarbose → type 2 diabetes (rank 1 in all seeds): 54% of the weight sits on stretches ending with another drug's treatment of the disease. The top three run through miglitol, in the same pharmacologic class, via the class and shared side effects. Deleting the top stretches lowers the reciprocal rank by 0.83, deleting the disease's other treatments by 0.98 | same | |
+| Dasatinib → hematologic cancer, the case chosen to favour a mechanism (reciprocal rank 0.78): the top stretch runs through a shared side effect to tioguanine, which treats the disease. Gene stretches carry 4% of the weight, and deleting all of dasatinib's gene facts does not lower the rank (+0.06). Deleting the disease's other treatments lowers it by 0.73 | same | |
+| Valsartan → hypertension stays first whatever is deleted on the drug's side; deleting hypertension's other treatments lowers its reciprocal rank by 0.90 | same | |
+| Metformin → type 2 diabetes (reciprocal rank 0.36): the top stretch is metformin treats metabolic syndrome X, which resembles type 2 diabetes. Deletion effects are mixed; removing metformin's gene facts raises the rank by 0.31 | same | |
+| The recorded weights rebuild the model's consensus output to within 8.4e-6 on every run | `results/e4_walk_explanations_raw.json` | |
+
+Attention weights alone are not attributions; the deletion tests support that the top stretches matter for
+these cases. The survey has one walk seed, the showcase pairs three.
 
 ### E5. Type-constrained negatives
 
