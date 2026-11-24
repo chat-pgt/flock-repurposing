@@ -72,8 +72,15 @@ because their candidate sets differ.
 | On first-indication edges (53, the primary stratum): 0.542 zero-shot, 0.517 uniform and 0.636 disease-only. Disease-only minus uniform: +0.119 [+0.017, +0.244] | same | |
 | Drugs with other training indications (98 edges) gain with both arms, +0.089 [−0.003, +0.179] uniform and +0.096 [+0.011, +0.193] disease-only, so the expected positive-unlabeled cost did not appear | same | |
 | Cost: 302 training steps per arm at about 10.7 s each, about 52 minutes per arm, peaking at 4.8 GB of GPU memory on a Kaggle T4 | same | |
+| ULTRA (public checkpoint), all 755 edges, fine-tuned on *treats* for 3 epochs: MRR 0.368 zero-shot; 0.565, 0.582 and 0.599 with uniform negatives, and 0.628, 0.631 and 0.651 with disease-only negatives, after epochs 1, 2 and 3 | `results/e5_negatives_ultra.json` | |
+| ULTRA, first-indication edges (298, the primary stratum): disease-only minus uniform +0.088 [+0.030, +0.170] after epoch 1, +0.063 [+0.024, +0.115] after epoch 2 and +0.054 [+0.012, +0.105] after epoch 3 | same | |
+| ULTRA, drugs with other training indications (457 edges): disease-only minus uniform +0.045 [+0.007, +0.086], +0.039 [−0.006, +0.082] and +0.052 [+0.018, +0.087]. No positive-unlabeled cost appears | same | |
+| Task fine-tuning itself is the larger effect: after one epoch ULTRA gains +0.198 [+0.128, +0.269] MRR over zero-shot with uniform negatives and +0.260 [+0.181, +0.342] with disease-only ones | same | |
+| ULTRA Hits@10: disease-only beats uniform by 5.0 points [1.5, 9.7] after epoch 1 but by 0.8 [−1.9, +3.9] after epoch 3, so the later gain is in the top ranks | same | |
+| ULTRA cost: 76 steps per epoch, about 8.8 minutes per epoch and 6.0 GB of GPU memory on a Kaggle T4 | same | |
 
-This is a pilot: one fold, one fine-tuning seed and one epoch. ULTRA's five-fold run is pending.
+FLOCK's run is a pilot: one fold, one fine-tuning seed and one epoch. ULTRA's covers all five folds with one
+fine-tuning seed. Every scored epoch is reported, and none was selected.
 
 ### E6. No-learning baselines for relation prediction
 
