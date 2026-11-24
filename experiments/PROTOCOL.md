@@ -153,7 +153,7 @@ Priorities are *core*, *extension* and *optional*.
   deletion effects on another drug's treatment show the E2 shortcut from the model's side; on gene
   stretches they read as mechanisms.
 - **Compute.** GPU, about 40 minutes on a Kaggle T4.
-- **Status.** Approved. Run on a Kaggle T4, results recorded, awaiting review.
+- **Status.** Approved. Run on a Kaggle T4. Results reviewed.
 
 ### E5. Type-constrained negatives in fine-tuning (extension)
 
