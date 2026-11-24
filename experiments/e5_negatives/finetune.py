@@ -1,9 +1,10 @@
 """E5: fine-tune on treats with uniform or disease-only negatives, then score the held-out fold as in E1.
 
-Each (fold, arm) starts from the released checkpoint, makes one pass over the fold's training treats facts,
-and is scored on the fold's held-out edges exactly as E1 scores them. Shards use E1's format, with condition
-`ft_uniform` or `ft_disease`. Walks are reseeded before scoring, so FLOCK's scoring walks match E1's for the
-same seed and fold, and both arms see the same training batches and walks.
+Each (fold, arm) starts from the released checkpoint, trains on the fold's training treats facts for a fixed
+number of epochs (3 for ULTRA, 1 for FLOCK), and is scored on the fold's held-out edges after every epoch,
+exactly as E1 scores them. Shards use E1's format, with condition `ft_<arm>_ep<epoch>`. Walks are reseeded
+before scoring, so FLOCK's scoring walks match E1's for the same seed and fold, and both arms see the same
+training batches and walks.
 
 Usage, from experiments/:
     python -m e5_negatives.finetune --model ultra --ultra-repo ULTRA --output-dir runs
@@ -37,6 +38,8 @@ PUBLISHED = {
     "flock": {"batch_size": 2, "micro_batch": 1, "lr": 5e-4, "n_negative": 256, "temperature": 1.0},
 }
 FLOCK_TRAIN_WALKS = 512
+# Fixed in advance and all reported. ULTRA is cheap enough to score a learning curve; FLOCK is a pilot.
+EPOCHS = {"ultra": 3, "flock": 1}
 LOG_EVERY = 25
 
 
@@ -51,8 +54,8 @@ def adversarial_bce(pred, temperature):
     return ((loss * weight).sum(dim=-1) / weight.sum(dim=-1)).mean()
 
 
-def train(model, data, steps, sampler, drugs, diseases, treats, settings, device, max_steps=None):
-    optimizer = torch.optim.AdamW(model.parameters(), lr=settings["lr"])
+def train(model, data, optimizer, steps, sampler, drugs, diseases, treats, settings, device, max_steps=None):
+    """Run one epoch of optimizer steps and return the losses and the time taken."""
     model.train()
     losses, start = [], time.perf_counter()
     for step, rows in enumerate(steps):
@@ -108,13 +111,17 @@ def load_model(name, device, ultra_repo, walk_num=None, ensemble=None):
     return model, settings
 
 
+def shard_path(args, arm, epoch, fold):
+    return args.output_dir / f"entity_{args.model}_ft_{arm}_ep{epoch}_tail_seed{args.seed}_fold{fold}.npz"
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--model", choices=["flock", "ultra"], required=True)
     parser.add_argument("--arms", default=",".join(ARMS))
     parser.add_argument("--folds", default="0,1,2,3,4")
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--epochs", type=int, default=1)
+    parser.add_argument("--epochs", type=int, help="Training epochs, each scored (default: 3 for ULTRA, 1 for FLOCK)")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--deadline", type=float, help="Unix time after which no new fold starts")
@@ -133,6 +140,7 @@ def main():
     if not set(arms) <= set(ARMS):
         raise SystemExit(f"arms must be among {ARMS}")
     settings = dict(PUBLISHED[args.model])
+    epochs = args.epochs or EPOCHS[args.model]
     if args.n_negative is not None:
         settings["n_negative"] = args.n_negative
 
@@ -156,21 +164,18 @@ def main():
         indications = training_indications(drugs, diseases, train_rows)
         data = None
         for arm in arms:
-            name = f"entity_{args.model}_ft_{arm}_tail_seed{args.seed}_fold{fold}.npz"
-            path = args.output_dir / name
-            if path.exists():
-                print(f"skip {name}", flush=True)
+            if shard_path(args, arm, epochs, fold).exists():
+                print(f"skip {shard_path(args, arm, epochs, fold).name}", flush=True)
                 continue
             if args.deadline is not None and time.time() > args.deadline:
-                print(f"time budget reached before {name}", flush=True)
+                print(f"time budget reached before {shard_path(args, arm, epochs, fold).name}", flush=True)
                 return
             # Load first: ULTRA's graph builder is importable only once its repository is on the path.
             model, model_settings = load_model(args.model, device, args.ultra_repo, args.walk_num, args.ensemble)
             if data is None:
                 keep = training_mask(graph, drugs[held], diseases[held], treats)
                 data = build_data(graph, keep, args.model, device).to(device)
-            if args.model == "flock":
-                model.N = args.train_walk_num
+            optimizer = torch.optim.AdamW(model.parameters(), lr=settings["lr"])
             sampler = NegativeSampler(
                 arm,
                 len(graph.entities),
@@ -179,45 +184,70 @@ def main():
                 settings["n_negative"],
                 np.random.default_rng([args.seed, fold, ARMS.index(arm)]),
             )
-            steps = batches(train_rows, settings["batch_size"], args.epochs, np.random.default_rng([args.seed, fold]))
+            order = np.random.default_rng([args.seed, fold])  # the same batches for both arms
             if str(device).startswith("cuda"):
                 torch.cuda.reset_peak_memory_stats()
-            print(f"{name}: training on {len(train_rows)} treats facts", flush=True)
-            seed_everything(1000 * args.seed + fold)
-            losses, train_seconds = train(
-                model, data, steps, sampler, drugs, diseases, treats, settings, device, args.max_steps
-            )
-            if args.model == "flock":
-                model.N = model_settings["walk_num"]
-            train_peak = peak_gpu_gb(device)
-            seed_everything(1000 * args.seed + fold)
-            start = time.perf_counter()
-            with torch.no_grad():
-                arrays = run_fold(model, data, graph, split_ids, fold, score_args, device)
-            seconds = time.perf_counter() - start
-            info = {
-                **run_metadata(device, model=args.model, direction="tail", condition=f"ft_{arm}", **model_settings),
-                "seed": args.seed,
-                "fold": fold,
-                "arm": arm,
-                "epochs": args.epochs,
-                "train_settings": settings,
-                "train_walk_num": args.train_walk_num if args.model == "flock" else None,
-                "train_steps": len(losses),
-                "train_seconds": train_seconds,
-                "train_peak_gpu_gb": train_peak,
-                "seconds": seconds,
-                "peak_gpu_gb": peak_gpu_gb(device),
-            }
-            save_shard(path, metadata=np.array(json.dumps(info)), train_loss=losses, **arrays)
             print(
-                f"{name}: {len(losses)} steps in {train_seconds / 60:.1f} min, loss {losses[:10].mean():.4f} -> "
-                f"{losses[-10:].mean():.4f} | {len(arrays['edge_rows'])} edges, MRR "
-                f"{arrays['reciprocal_rank'].mean():.3f}, Hits@10 {arrays['hits10'].mean():.3f}, "
-                f"{seconds / len(arrays['query_entities']):.2f} s/query, peak GPU {train_peak}",
+                f"{arm} arm, fold {fold}: training on {len(train_rows)} treats facts for {epochs} epochs",
                 flush=True,
             )
-            del model
+            steps_so_far = 0
+            for epoch in range(1, epochs + 1):
+                if args.model == "flock":
+                    model.N = args.train_walk_num
+                seed_everything(1000 * args.seed + fold + 100_000 * (epoch - 1))
+                losses, train_seconds = train(
+                    model,
+                    data,
+                    optimizer,
+                    batches(train_rows, settings["batch_size"], 1, order),
+                    sampler,
+                    drugs,
+                    diseases,
+                    treats,
+                    settings,
+                    device,
+                    args.max_steps,
+                )
+                steps_so_far += len(losses)
+                if args.model == "flock":
+                    model.N = model_settings["walk_num"]
+                train_peak = peak_gpu_gb(device)
+                seed_everything(1000 * args.seed + fold)  # E1's scoring walks
+                start = time.perf_counter()
+                with torch.no_grad():
+                    arrays = run_fold(model, data, graph, split_ids, fold, score_args, device)
+                seconds = time.perf_counter() - start
+                info = {
+                    **run_metadata(
+                        device, model=args.model, direction="tail", condition=f"ft_{arm}_ep{epoch}", **model_settings
+                    ),
+                    "seed": args.seed,
+                    "fold": fold,
+                    "arm": arm,
+                    "epoch": epoch,
+                    "epochs": epochs,
+                    "train_settings": settings,
+                    "train_walk_num": args.train_walk_num if args.model == "flock" else None,
+                    "train_steps": len(losses),
+                    "train_steps_total": steps_so_far,
+                    "train_seconds": train_seconds,
+                    "train_peak_gpu_gb": train_peak,
+                    "seconds": seconds,
+                    "peak_gpu_gb": peak_gpu_gb(device),
+                }
+                save_shard(
+                    shard_path(args, arm, epoch, fold), metadata=np.array(json.dumps(info)), train_loss=losses, **arrays
+                )
+                print(
+                    f"{shard_path(args, arm, epoch, fold).name}: {len(losses)} steps, {train_seconds / 60:.1f} min, "
+                    f"loss "
+                    f"{losses[:10].mean():.4f} -> {losses[-10:].mean():.4f} | {len(arrays['edge_rows'])} edges, "
+                    f"MRR {arrays['reciprocal_rank'].mean():.3f}, Hits@10 {arrays['hits10'].mean():.3f}, "
+                    f"{seconds / len(arrays['query_entities']):.2f} s/query, peak GPU {train_peak}",
+                    flush=True,
+                )
+            del model, optimizer
             if str(device).startswith("cuda"):
                 torch.cuda.empty_cache()
         del data
