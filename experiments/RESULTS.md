@@ -66,7 +66,14 @@ because their candidate sets differ.
 
 ### E5. Type-constrained negatives
 
-*Pending.*
+| Result | Evidence | Slide |
+|---|---|---|
+| FLOCK pilot, fold 0 (151 edges), one epoch of fine-tuning on *treats*: drug → disease MRR 0.422 zero-shot, 0.471 with uniform negatives and 0.517 with disease-only negatives. Disease-only minus zero-shot: +0.095 [+0.027, +0.170] | `results/e5_negatives_flock.json` | |
+| On first-indication edges (53, the primary stratum): 0.542 zero-shot, 0.517 uniform and 0.636 disease-only. Disease-only minus uniform: +0.119 [+0.017, +0.244] | same | |
+| Drugs with other training indications (98 edges) gain with both arms, +0.089 [−0.003, +0.179] uniform and +0.096 [+0.011, +0.193] disease-only, so the expected positive-unlabeled cost did not appear | same | |
+| Cost: 302 training steps per arm at about 10.7 s each, about 52 minutes per arm, peaking at 4.8 GB of GPU memory on a Kaggle T4 | same | |
+
+This is a pilot: one fold, one fine-tuning seed and one epoch. ULTRA's five-fold run is pending.
 
 ### E6. No-learning baselines for relation prediction
 
