@@ -135,16 +135,30 @@ Priorities are *core*, *extension* and *optional*.
 - **Origin.** Working through how fine-tuning operates: its 256 negatives are drawn uniformly over about
   45,000 nodes, so on average fewer than one is a disease.
 - **Question.** Does fine-tuning on *treats* improve with disease-only negatives?
-- **Design.** For *treats* positives, draw tail negatives from diseases only, and compare with uniform
-  negatives on the same folds. Run ULTRA first, then FLOCK if it fits in memory. Both arms are evaluated
-  at the D9 setting. Other hyperparameters stay fixed at the published values, with no tuning on
-  held-out folds. Training negatives are filtered
-  against the training graph only, so held-out edges can be drawn as negatives, as would happen in
-  practice.
-- **Read-out.** A gain supports better negatives. A loss may reflect pushing down true but unrecorded
-  indications (positive-unlabeled learning).
-- **Compute.** GPU. The most expensive experiment.
-- **Status.** Not started. To be built now that the E1 and E2 results are in.
+- **Design.** Each fold starts from the released checkpoint and makes one pass over that fold's training
+  *treats* facts (about 604), corrupting tails only. The two arms differ only in where the 256 negatives
+  come from: every entity, as in the released sampler, or diseases only. Both arms exclude the drug's
+  training indications and see the same batches and walks. Training negatives are filtered against the
+  training graph only, so held-out edges can be drawn as negatives, as would happen in practice. Other
+  settings are the published ones: AdamW, learning rate 5e-4, self-adversarial temperature 1, batch 8
+  for ULTRA and 2 for FLOCK. One pass is fixed in advance, and nothing is tuned on held-out folds.
+  Scoring is E1's, at the D9 setting, with walks reseeded so that FLOCK's scoring walks match E1's seed
+  0. Each arm is compared, paired per edge, with E1's zero-shot run on the same edges.
+  - ULTRA (public checkpoint), all five folds. Its kernel replacement gets a backward pass that
+    recomputes messages in chunks, so training fits in memory.
+  - FLOCK, a pilot on fold 0. Measured on CPU, one training query keeps about 0.023·n GB of activations,
+    so the published n = 1024 with batch 2 would need about 48 GB. FLOCK therefore trains at n = 512 with
+    one query per micro-batch, accumulated to batch 2, and its sequence network is recomputed in the
+    backward pass (about 2.5 GB). Checkpointing leaves gradients unchanged. n = 512 rather than 1024
+    keeps each run near an hour.
+
+  Unlike the published fine-tuning, which uses all relations, this fine-tunes on *treats* only, so it
+  tests task-specific fine-tuning.
+- **Read-out.** A gain from disease-only negatives over uniform ones supports better negatives. The
+  uniform arm separates the effect of fine-tuning itself from that of the negatives. A loss may reflect
+  pushing down true but unrecorded indications (positive-unlabeled learning).
+- **Compute.** GPU. ULTRA: 10 runs of about 76 steps. FLOCK: 2 runs of about 302 steps, roughly 2 hours.
+- **Status.** Built and smoke-tested on CPU. Awaiting approval.
 
 ### E6. No-learning baseline for relation prediction (core)
 
