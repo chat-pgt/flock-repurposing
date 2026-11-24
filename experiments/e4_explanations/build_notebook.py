@@ -7,11 +7,12 @@ import base64
 
 from gpu.build_notebooks import BUNDLED_PATHS, GET_CODE, HOW_TO_RUN, OUTPUT_DIR, build, git
 
-INTRO = f"""# E4: which walks carry FLOCK's prediction
+INTRO = f"""# E4: which walks carry FLOCK's predictions, and do they matter
 
-Scores three held-out drug → disease pairs zero-shot with FLOCK's entity checkpoint, on the fold where each is
-held out, with three walk seeds. It records how much each walk contributes to the target disease's state and
-maps the walks back to entity and relation names. It takes a few minutes, so Colab is enough.
+Scores four showcase drug → disease pairs (three walk seeds) and a survey of 40 held-out edges (one seed)
+zero-shot with FLOCK's entity checkpoint, each on the fold where its edge is held out. It credits each walk
+with its share of the disease's state, names the drug → disease stretches, and rescores after deleting the
+top stretches' facts, random facts, and families of the drug's facts. About 40 minutes on a Kaggle T4.
 
 {HOW_TO_RUN}"""
 
