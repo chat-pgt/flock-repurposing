@@ -1,0 +1,403 @@
+{
+  "metadata": {
+    "commit": "205deef11b0183f7de09e451d8ea5c03b75943be",
+    "python": "3.12.3",
+    "torch": "2.8.0+cu126",
+    "torch_geometric": "2.4.0",
+    "numpy": "1.26.4",
+    "device": "Tesla T4",
+    "model": "flock",
+    "checkpoint_sha256": "d32ae78c0b0b5731ce183fd7e05f6443c03bbb4dd795481d0077818b8ba67850",
+    "walk_num": 512,
+    "ensemble": 2,
+    "walk_len": 128
+  },
+  "showcase": [
+    {
+      "pair": "Valsartan -> hypertension",
+      "fold": 1,
+      "reciprocal_rank": 1.0,
+      "share_by_category": {
+        "drug not on walk": 0.7282904578179227,
+        "longer than 4 hops": 0.23649203343287883,
+        "another drug's treatment": 0.034318386414610554,
+        "other": 0.0008358396001905788,
+        "gene": 6.32827343974901e-05
+      },
+      "top_stretches": [
+        {
+          "stretch": "Valsartan (Compound) <-includes- Angiotensin 2 Receptor Antagonists (Pharmacologic Class) -includes-> Eprosartan (Compound) -treats-> hypertension (Disease)",
+          "mean_share": 0.014683445022596888,
+          "facts": 3
+        },
+        {
+          "stretch": "Valsartan (Compound) -causes-> Anaphylactic shock (Side Effect) <-causes- Isradipine (Compound) -treats-> hypertension (Disease)",
+          "mean_share": 0.01090793726669252,
+          "facts": 3
+        },
+        {
+          "stretch": "Valsartan (Compound) -causes-> Gastrointestinal pain (Side Effect) <-causes- Bepridil (Compound) -treats-> hypertension (Disease)",
+          "mean_share": 0.0035462705223752882,
+          "facts": 3
+        },
+        {
+          "stretch": "Valsartan (Compound) -causes-> Sinusitis (Side Effect) <-causes- Nifedipine (Compound) -treats-> hypertension (Disease)",
+          "mean_share": 0.0019500319721244474,
+          "facts": 3
+        },
+        {
+          "stretch": "Valsartan (Compound) -causes-> Vertigo (Side Effect) <-causes- Perindopril (Compound) -treats-> hypertension (Disease)",
+          "mean_share": 0.0011254771732480521,
+          "facts": 3
+        }
+      ],
+      "deletions": {
+        "top stretches": {
+          "facts_deleted": 15,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "random facts at drug or disease": {
+          "facts_deleted": 15.0,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug resembles": {
+          "facts_deleted": 6,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug's pharmacologic classes": {
+          "facts_deleted": 1,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug's genes": {
+          "facts_deleted": 12,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug's side effects": {
+          "facts_deleted": 110,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "disease's other treatments": {
+          "facts_deleted": 55,
+          "reciprocal_rank": 0.09629629629629628,
+          "reciprocal_rank_change": -0.9037037037037037
+        }
+      },
+      "consensus_max_abs_error": 6.18897330184609e-06
+    },
+    {
+      "pair": "Acarbose -> type 2 diabetes mellitus",
+      "fold": 0,
+      "reciprocal_rank": 1.0,
+      "share_by_category": {
+        "another drug's treatment": 0.5352025000291186,
+        "drug not on walk": 0.33824850414289553,
+        "longer than 4 hops": 0.11863891855840811,
+        "gene": 0.00791007726957757
+      },
+      "top_stretches": [
+        {
+          "stretch": "Acarbose (Compound) -causes-> Pneumoperitoneum (Side Effect) <-causes- Miglitol (Compound) -treats-> type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.10752558383687687,
+          "facts": 3
+        },
+        {
+          "stretch": "Acarbose (Compound) <-includes- alpha Glucosidase Inhibitors (Pharmacologic Class) -includes-> Miglitol (Compound) -treats-> type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.1003858593603805,
+          "facts": 3
+        },
+        {
+          "stretch": "Acarbose (Compound) -causes-> Pneumatosis cystoides intestinalis (Side Effect) <-causes- Miglitol (Compound) -treats-> type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.08294716061036238,
+          "facts": 3
+        },
+        {
+          "stretch": "Acarbose (Compound) -causes-> Volvulus (Side Effect) <-causes- Miglitol (Compound) -treats-> type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.0810988768382507,
+          "facts": 3
+        },
+        {
+          "stretch": "Acarbose (Compound) -causes-> Pneumatosis intestinalis (Side Effect) <-causes- Miglitol (Compound) -treats-> type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.056015515008436115,
+          "facts": 3
+        }
+      ],
+      "deletions": {
+        "top stretches": {
+          "facts_deleted": 11,
+          "reciprocal_rank": 0.16705516705516707,
+          "reciprocal_rank_change": -0.8329448329448329
+        },
+        "random facts at drug or disease": {
+          "facts_deleted": 11.0,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug resembles": {
+          "facts_deleted": 6,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug's pharmacologic classes": {
+          "facts_deleted": 1,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug's genes": {
+          "facts_deleted": 15,
+          "reciprocal_rank": 1.0,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug's side effects": {
+          "facts_deleted": 42,
+          "reciprocal_rank": 0.8333333333333334,
+          "reciprocal_rank_change": -0.16666666666666663
+        },
+        "disease's other treatments": {
+          "facts_deleted": 17,
+          "reciprocal_rank": 0.01995896144832315,
+          "reciprocal_rank_change": -0.9800410385516769
+        }
+      },
+      "consensus_max_abs_error": 3.112426458784512e-06
+    },
+    {
+      "pair": "Metformin -> type 2 diabetes mellitus",
+      "fold": 1,
+      "reciprocal_rank": 0.3611111111111111,
+      "share_by_category": {
+        "drug not on walk": 0.5866516104229735,
+        "longer than 4 hops": 0.3564247965553293,
+        "gene": 0.03543634326940452,
+        "other": 0.018922698544541105,
+        "another drug's treatment": 0.002564551207751475
+      },
+      "top_stretches": [
+        {
+          "stretch": "Metformin (Compound) -treats-> metabolic syndrome X (Disease) -resembles-> type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.014651071944943287,
+          "facts": 2
+        },
+        {
+          "stretch": "Metformin (Compound) -binds-> NDUFB7 (Gene) <-regulates- PEPD (Gene) <-associates- type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.012241512271201951,
+          "facts": 3
+        },
+        {
+          "stretch": "Metformin (Compound) -binds-> ND1 (Gene) <-associates- type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.008348444185784242,
+          "facts": 2
+        },
+        {
+          "stretch": "Metformin (Compound) -downregulates-> HAT1 (Gene) -interacts-> G3BP1 (Gene) -regulates-> TSPAN8 (Gene) <-associates- type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.005165825490420832,
+          "facts": 4
+        },
+        {
+          "stretch": "Metformin (Compound) -binds-> NDUFB1 (Gene) <-expresses- spinal cord (Anatomy) -expresses-> MTR (Gene) <-associates- type 2 diabetes mellitus (Disease)",
+          "mean_share": 0.005053184962793264,
+          "facts": 4
+        }
+      ],
+      "deletions": {
+        "top stretches": {
+          "facts_deleted": 15,
+          "reciprocal_rank": 0.20000000000000004,
+          "reciprocal_rank_change": -0.16111111111111107
+        },
+        "random facts at drug or disease": {
+          "facts_deleted": 15.0,
+          "reciprocal_rank": 0.47222222222222227,
+          "reciprocal_rank_change": 0.1111111111111111
+        },
+        "drug resembles": {
+          "facts_deleted": 0,
+          "reciprocal_rank": 0.3611111111111111,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug's pharmacologic classes": {
+          "facts_deleted": 1,
+          "reciprocal_rank": 0.5,
+          "reciprocal_rank_change": 0.1388888888888889
+        },
+        "drug's genes": {
+          "facts_deleted": 86,
+          "reciprocal_rank": 0.6666666666666666,
+          "reciprocal_rank_change": 0.3055555555555555
+        },
+        "drug's side effects": {
+          "facts_deleted": 139,
+          "reciprocal_rank": 0.5555555555555555,
+          "reciprocal_rank_change": 0.19444444444444436
+        },
+        "disease's other treatments": {
+          "facts_deleted": 18,
+          "reciprocal_rank": 0.15555555555555556,
+          "reciprocal_rank_change": -0.20555555555555555
+        }
+      },
+      "consensus_max_abs_error": 3.008066579823776e-06
+    },
+    {
+      "pair": "Dasatinib -> hematologic cancer",
+      "fold": 4,
+      "reciprocal_rank": 0.7777777777777778,
+      "share_by_category": {
+        "drug not on walk": 0.6678629223704093,
+        "longer than 4 hops": 0.2747117353195337,
+        "gene": 0.03517344710473786,
+        "another drug's treatment": 0.022251895205319144
+      },
+      "top_stretches": [
+        {
+          "stretch": "Dasatinib (Compound) -causes-> Cytopenia (Side Effect) <-causes- Tioguanine (Compound) -treats-> hematologic cancer (Disease)",
+          "mean_share": 0.010775713413768727,
+          "facts": 3
+        },
+        {
+          "stretch": "Dasatinib (Compound) -downregulates-> TUBA1B (Gene) <-interacts- NFKBIA (Gene) <-associates- hematologic cancer (Disease)",
+          "mean_share": 0.009074756399917039,
+          "facts": 3
+        },
+        {
+          "stretch": "Dasatinib (Compound) -binds-> FGR (Gene) <-associates- hematologic cancer (Disease)",
+          "mean_share": 0.00787489875756059,
+          "facts": 2
+        },
+        {
+          "stretch": "Dasatinib (Compound) -downregulates-> FSTL1 (Gene) <-downregulates- hematologic cancer (Disease)",
+          "mean_share": 0.007292616391718776,
+          "facts": 2
+        },
+        {
+          "stretch": "Dasatinib (Compound) -causes-> Cytopenia (Side Effect) <-causes- Mercaptopurine (Compound) -treats-> hematologic cancer (Disease)",
+          "mean_share": 0.005730219952956829,
+          "facts": 3
+        }
+      ],
+      "deletions": {
+        "top stretches": {
+          "facts_deleted": 12,
+          "reciprocal_rank": 0.5,
+          "reciprocal_rank_change": -0.2777777777777778
+        },
+        "random facts at drug or disease": {
+          "facts_deleted": 12.0,
+          "reciprocal_rank": 0.7777777777777778,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug resembles": {
+          "facts_deleted": 0,
+          "reciprocal_rank": 0.7777777777777778,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug's pharmacologic classes": {
+          "facts_deleted": 0,
+          "reciprocal_rank": 0.7777777777777778,
+          "reciprocal_rank_change": 0.0
+        },
+        "drug's genes": {
+          "facts_deleted": 564,
+          "reciprocal_rank": 0.8333333333333334,
+          "reciprocal_rank_change": 0.05555555555555558
+        },
+        "drug's side effects": {
+          "facts_deleted": 288,
+          "reciprocal_rank": 0.6666666666666666,
+          "reciprocal_rank_change": -0.11111111111111116
+        },
+        "disease's other treatments": {
+          "facts_deleted": 40,
+          "reciprocal_rank": 0.04466230936819172,
+          "reciprocal_rank_change": -0.7331154684095861
+        }
+      },
+      "consensus_max_abs_error": 5.177971171832496e-06
+    }
+  ],
+  "survey": {
+    "n_edges": 40,
+    "mrr": {
+      "mean": 0.5862294727616204,
+      "ci95": [
+        0.3369147388668481,
+        0.800600839079651
+      ]
+    },
+    "share_by_category": {
+      "drug not on walk": 0.6537624013878992,
+      "longer than 4 hops": 0.26966277957049006,
+      "another drug's treatment": 0.054041025058341095,
+      "gene": 0.014160757105398743,
+      "other": 0.008373036877870882
+    },
+    "share_by_drug_distance": {
+      "drug not on walk": 0.6537624013878992,
+      "over 10 hops": 0.2432619922874261,
+      "3 hops": 0.04368829350283216,
+      "5-10 hops": 0.026400787283063925,
+      "2 hops": 0.024930819671396442,
+      "4 hops": 0.00795570586738212
+    },
+    "share_by_walk_start": {
+      "relation-balanced edge": 0.4291225377078893,
+      "drug": 0.3359118453726224,
+      "random node": 0.23496561691948814
+    },
+    "deletion": {
+      "facts_deleted_mean": 8.575,
+      "rr_change_top_stretches": {
+        "mean": -0.15375326078560203,
+        "ci95": [
+          -0.30282576847874276,
+          -0.04076582247098124
+        ]
+      },
+      "rr_change_random": {
+        "mean": -0.0018449223684126187,
+        "ci95": [
+          -0.0908453041639463,
+          0.09267940146801404
+        ]
+      },
+      "rr_change_top_minus_random": {
+        "mean": -0.15190833841718943,
+        "ci95": [
+          -0.3238041443667944,
+          -0.014505145426349363
+        ]
+      },
+      "score_change_top_minus_random": {
+        "mean": -0.4332157164812088,
+        "ci95": [
+          -0.8419066475300953,
+          -0.10778404779054915
+        ]
+      },
+      "edges_where_top_lowers_rr_more": 15,
+      "edges_where_random_lowers_rr_more": 7
+    },
+    "top3_cases": {
+      "n_edges": 26,
+      "share_by_category": {
+        "drug not on walk": 0.6362075856532379,
+        "longer than 4 hops": 0.2687826166729151,
+        "another drug's treatment": 0.07743723630051752,
+        "gene": 0.01635348665783417,
+        "other": 0.001219074715495204
+      },
+      "rr_change_top_minus_random": {
+        "mean": -0.20088850083789359,
+        "ci95": [
+          -0.45859227480465864,
+          0.00642106512720533
+        ]
+      }
+    }
+  }
+}
