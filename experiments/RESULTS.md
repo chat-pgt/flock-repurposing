@@ -58,7 +58,7 @@ runs.
 | Baseline A (uniform among type-compatible relations): MRR 0.779, Hits@1 0.620 | same | |
 | Published zero-shot scores for comparison: FLOCK 0.940 / 0.890, TRIX 0.809 / 0.707, ULTRA 0.634 / 0.524 (MRR / Hits@1) | Table 11 of the paper | 2 |
 | 48,419 test triples (43%) have only one relation compatible with their entity types. On the other 64,091, MRR is 0.798 for B and 0.851 for C. FLOCK's published 0.940 implies at least 0.895 on those triples | same | 2 |
-| Compound–Disease, *treats* vs *palliates* (56 triples): Hits@1 is 50% at random, 64.3% for B and 60.7% for C (34 of 56, 95% Wilson CI [47.6%, 72.4%]). Too few triples to separate the baselines | same | |
+| Compound–Disease (56 triples), choosing between *treats* and *palliates*: 50% at random, 64.3% for B and 80.4% for C [59.3%, 95.1%]. Over all 24 relations, C's top choice is right for only 60.7% (34 of 56), because without entity types it can rank a more frequent, unrelated relation first. Too few triples to separate the baselines | same, `results/e6_compound_disease.json` | |
 
 FLOCK's scores here are the published ones. They have not been reproduced in this study yet.
 
