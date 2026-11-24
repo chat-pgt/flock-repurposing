@@ -123,12 +123,26 @@ Priorities are *core*, *extension* and *optional*.
 
 - **Origin.** If this approach suits repurposing, its walks should read like candidate mechanisms
   (drug → gene → disease).
-- **Question.** Do high-confidence walks look like plausible mechanisms?
-- **Design.** For one well-known drug–disease pair, extract the highest-confidence walks and map them
-  back to entity names.
-- **Read-out.** Illustrative only, because confidence weights are not faithful attributions.
-- **Compute.** GPU.
-- **Status.** Not started. To be built now that the E1 and E2 results are in.
+- **Question.** Do high-confidence walks look like plausible mechanisms, or like the shortcuts that E1
+  and E2 found?
+- **Design.** FLOCK's entity checkpoint, zero-shot at the D9 setting, with three walk seeds. Three pairs,
+  chosen from E1 and E2 before running, each scored on the fold where it is held out:
+  - valsartan → hypertension, flagged in E2 because sartans it resembles treat hypertension;
+  - acarbose → type 2 diabetes, a first indication that FLOCK ranks first and ULTRA about tenth;
+  - metformin → type 2 diabetes, the best-known pair, which FLOCK ranks lower (reciprocal rank 0.29).
+
+  FLOCK builds the disease's state as a sum over refinements of an attention-weighted mean over every walk
+  position that visits it. The runner records those weights without changing upstream code, checks that
+  they rebuild the model's consensus output, and credits each walk with its share. For walks that also
+  visit the drug, it takes the shortest stretch between drug and disease and maps it to names. Reported:
+  the disease's rank; weight shares by walk start, by whether the walk visits the drug and by drug–disease
+  distance; metapaths of stretches of at most 4 hops; the share on stretches ending with another compound
+  that treats the disease; and the 10 stretches with most weight, averaged over seeds.
+- **Read-out.** Illustrative only, because attention weights are not faithful attributions. Weight on
+  stretches through other compounds that treat the disease shows the E2 shortcut from the model's side.
+  Drug–gene–disease stretches would read as mechanisms.
+- **Compute.** GPU, 9 queries, a few minutes. Colab is enough.
+- **Status.** Built and smoke-tested on CPU. Awaiting approval.
 
 ### E5. Type-constrained negatives in fine-tuning (extension)
 
