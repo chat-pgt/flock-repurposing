@@ -173,13 +173,17 @@ Priorities are *core*, *extension* and *optional*.
   *downregulates* connect the same entity types?
 - **Question.** Does this failure, the paper's like/dislike example, actually occur on a pharmacological
   graph?
-- **Design.** Extract relation representations from ULTRA and FLOCK for a fixed query relation. Compute
-  cosine similarity for same-type pairs (Compound, Disease and Anatomy up/down–Gene; *treats* vs
-  *palliates*) and for control pairs. Add a PCA plot like the paper's Figure 6.
-- **Read-out.** ULTRA cosine near 1 demonstrates the paper's motivation on pharmacological data. Values
-  clearly below 1 mean the problem does not bind on Hetionet.
-- **Compute.** GPU.
-- **Status.** Not started.
+- **Design.** Extract relation representations on the full graph for the query relation *treats*. ULTRA
+  is deterministic. FLOCK uses 20 sampled drugs, three walk seeds and both ensemble passes. Compute cosine
+  similarity for same-type pairs (Compound, Disease and Anatomy up/down–Gene; *treats* vs *palliates*)
+  and for control pairs that connect different entity types, both raw and after subtracting the mean
+  relation. Add a PCA plot like the paper's Figure 6.
+  A follow-up repeats FLOCK with a neutral query relation (*Compound causes Side Effect*), and scores 100
+  *upregulates* and 100 *downregulates* Compound–Gene test triples as relation queries, where chance is 50%.
+- **Read-out.** ULTRA cosine near 1, well above the controls, demonstrates the paper's motivation on
+  pharmacological data. Values close to the controls mean the problem does not bind on Hetionet.
+- **Compute.** GPU, about 60 FLOCK queries, plus about 2 hours for the follow-up.
+- **Status.** First run and follow-up done on a Kaggle T4 and reviewed.
 
 ---
 

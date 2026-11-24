@@ -86,4 +86,16 @@ The overall FLOCK, TRIX and ULTRA scores are the published ones. This study rera
 
 ### E7. Relation similarity
 
-*Pending.*
+| Result | Evidence | Slide |
+|---|---|---|
+| ULTRA gives numerically identical representations to *upregulates* and *downregulates* for Compound, Disease and Anatomy–Gene, and to *treats* and *palliates*, on every query relation outside the pair (relative distance at most 1.3e-7) | `results/e7_relation_similarity.json` | 2 |
+| FLOCK's relation states on *treats* queries show no stable up/down separation. A nearest-centroid probe on held-out drugs scores 49.6%, 47.9% and 56.2% for Compound, Disease and Anatomy–Gene (chance is 50%), against a median of 100% on pairs connecting different entity types | same | 2 |
+| With a neutral query relation (*Compound causes Side Effect*), FLOCK's states still show no up/down separation: the probe scores 50.0%, 50.4% and 54.6% for Compound, Disease and Anatomy–Gene. *Treats* vs *palliates* separates at 75.8%, against a median of 99% on pairs connecting different entity types | same | |
+| As a predictor, FLOCK tells *upregulates* from *downregulates* on 200 balanced Compound–Gene test triples (chance 50%): 88.2% [80.2%, 94.4%] with its relation checkpoint and 3 walk seeds. ULTRA (public checkpoint) scores 52.0% [39.4%, 64.1%] and Baseline C 71.5% [60.7%, 81.5%]. FLOCK leads ULTRA by 36.2 points [23.2, 49.3] and C by 16.7 [4.6, 28.9] | `results/e7_relation_pairs.json` | 2 |
+| ULTRA's choices lean to *upregulates*: it is right on 70% of *upregulates* triples and 34% of *downregulates* ones. FLOCK is right on 92% and 84% | same | |
+
+The state probes use FLOCK's entity checkpoint and the prediction test uses its relation checkpoint. FLOCK
+separates up from down when predicting, although the probe finds no difference in the entity checkpoint's
+relation states. With *treats* as the query relation, FLOCK's *treats* vs *palliates* probe is not
+reported, because the query marker separates the two. ULTRA's chance-level result matches E6, where it
+also cannot tell *treats* from *palliates*.
