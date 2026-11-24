@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "commit": "2e48edaa1f9d0e2bca1f0f1273427206c31220ce",
+    "code_modified_since_commit": false,
+    "python": "3.13.9",
+    "numpy": "2.5.5",
+    "data_sha256": {
+      "hetionet-v1.0-edges.sif.gz": "611f0411ac666be4e0270e54bbca67407e14720bfc3099311f0f5eec25c5a947",
+      "treats_5fold_seed0.tsv": "d64d9090e9e93c445dbcaebd875c97740fe9b001ba322a189c3e16e5e1661d99"
+    },
+    "bootstrap_draws": 10000,
+    "bootstrap_seed": 0
+  },
+  "strata": {
+    "all": {
+      "n_edges": 755,
+      "share_with_any_analogue": 0.8211920529801324,
+      "flagged": {
+        "mean": 0.4900662251655629,
+        "ci95": [
+          0.38326531569565625,
+          0.5855521871681567
+        ]
+      },
+      "control_uniform": 0.015247642529171788,
+      "control_popularity_weighted": 0.04670532315733977,
+      "flagged_minus_weighted_control": {
+        "mean": 0.4433609020082231,
+        "ci95": [
+          0.34295596655359867,
+          0.5302613180379157
+        ]
+      },
+      "enrichment_over_weighted_control": 10.492727424551578
+    },
+    "drug_has_other_indication": {
+      "n_edges": 457,
+      "share_with_any_analogue": 0.8293216630196937,
+      "flagged": {
+        "mean": 0.47702407002188185,
+        "ci95": [
+          0.3384204786776101,
+          0.6063023748537457
+        ]
+      },
+      "control_uniform": 0.01715366025226431,
+      "control_popularity_weighted": 0.05004326166862633,
+      "flagged_minus_weighted_control": {
+        "mean": 0.42698080835325547,
+        "ci95": [
+          0.3015429297741271,
+          0.5435262407959939
+        ]
+      },
+      "enrichment_over_weighted_control": 9.532233793644648
+    },
+    "first_indication": {
+      "n_edges": 298,
+      "share_with_any_analogue": 0.8087248322147651,
+      "flagged": {
+        "mean": 0.5100671140939598,
+        "ci95": [
+          0.38162237790804554,
+          0.6133849854916611
+        ]
+      },
+      "control_uniform": 0.012324655618254736,
+      "control_popularity_weighted": 0.04158640403097079,
+      "flagged_minus_weighted_control": {
+        "mean": 0.46848071006298886,
+        "ci95": [
+          0.33855375978679936,
+          0.5699645865204962
+        ]
+      },
+      "enrichment_over_weighted_control": 12.26523730481952
+    }
+  }
+}

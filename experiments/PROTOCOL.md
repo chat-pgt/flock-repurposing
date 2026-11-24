@@ -99,12 +99,13 @@ Priorities are *core*, *extension* and *optional*.
   with ketamine and esketamine. How often does that happen in a random split?
 - **Question.** How much of the apparent repurposing signal is "a similar drug already treats this"?
 - **Design.** For each held-out (drug, *treats*, disease), check whether a drug it *resembles* treats
-  that disease in the training graph, and report the fraction. If GPU time allows, remove the
-  *resembles* edges and rerun E1.
-- **Read-out.** A large fraction, or a large drop without *resembles*, means performance depends on
-  near-duplicates.
+  that disease in the training graph, and report the fraction. Compare it with the same rate over
+  diseases the drug is not known to treat, both uniformly and weighted by disease popularity, because
+  hub diseases are flagged more easily. If GPU time allows, remove the *resembles* edges and rerun E1.
+- **Read-out.** A fraction well above the popularity-weighted control, or a large drop without
+  *resembles*, means performance depends on near-duplicates.
 - **Compute.** CPU for the fraction, GPU for the ablation.
-- **Status.** Not started.
+- **Status.** Fraction approved and run. Ablation run on a Kaggle T4 with ULTRA and FLOCK walk seeds 0, 1 and 2. Results reviewed.
 
 ### E3. Walk coverage (optional)
 
