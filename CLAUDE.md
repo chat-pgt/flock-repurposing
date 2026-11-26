@@ -9,10 +9,11 @@ FLOCK performs on drug repurposing with Hetionet. The study lives in `experiment
 ## Git
 
 - `main` mirrors upstream. All work happens on `experiments`.
-- Remotes: `origin` is the private repo, `upstream` is the original (push disabled).
+- Remotes: `origin` is this repo, `upstream` is the original (push disabled).
 - Upstream code (`src_*`, `graph-walker`) changes only when an experiment needs it, in small separate
   commits, so `git diff upstream/main -- src_entity src_relation graph-walker` shows every patch.
-- Keep personal, employer and interview details out of tracked files. This repo may become public.
+- This repo is public. Keep personal details and any context outside the study out of tracked files,
+  commits and PRs.
 - Commits are one-line, atomic and conventional, with no co-author trailer.
 - Run `uv run --project experiments pre-commit install` once per clone. Never bypass the hooks.
 - Each experiment gets its own branch and a PR into `experiments`. The PR body records the question,
